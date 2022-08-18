@@ -1,13 +1,42 @@
-import React from 'react'
-import second from ''
-const Main = () => {
+import  {useContext} from 'react'
+import {LobbyContext} from '../context/LobbyContext'
+import {useNavigate} from "react-router-dom";
 
+const Main = () => {
+    const {lobbyKey, setLobbyKey, displayName, setDisplayName, host ,setHost} = useContext(LobbyContext)
+    const navigate = useNavigate()
+
+function lobbyJoiner() {
+    if (lobbyKey && displayName) {
+        navigate(`/lobby/:${lobbyKey}`)
+    }else{
+        console.log("please enter a diplay name and a lobby key")
+    }
+}
+function lobbyCreater() {
+    if (lobbyKey && displayName) {
+        setHost(displayName)
+        navigate(`/lobby/:${lobbyKey}`)
+    }else{
+        console.log("please enter a diplay name and a lobby key")
+    }
+    
+}
   return (
+    <>
+    <h1>Welcome to drawing game</h1>
     <div>
-    <h1>welcome to drawing game</h1>
-    <label htmlFor="lobbykey">Enter the Lobby key</label>
-    <input id="lobbykey" type="text" />
+        <label htmlFor="lobbyKey">Enter the Lobby Key</label>
+        <input id="lobbyKey" type="text" value={lobbyKey} onChange={(e)=>setLobbyKey(e.target.value)}/>
     </div>
+    <div>
+        <label htmlFor="displayName">Enter a Display Name</label>
+        <input id="displayName" type="text" value={displayName} onChange={(e)=>setDisplayName(e.target.value)}/>
+    </div>
+
+    <button onClick={()=>lobbyJoiner()}>Join Lobby as participant</button>
+    <button onClick={()=>lobbyCreater()}>Create Lobby as Host</button>
+    </>
   )
 }
 
