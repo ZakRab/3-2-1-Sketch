@@ -8,8 +8,13 @@ const useSocket = (lobbyKey, displayName) => {
       query: { displayName, lobbyKey },
     });
     socketRef.current.on("user connect", ({ displayName }) => {
-      setPlayers((curr) => [displayName, ...curr]);
-      console.log(players);
+      if(displayName == host){
+        setPlayers((curr) => [displayName, ...curr]);
+        socketRef.current.emit(players)
+      }else{
+        socketRef.current.io
+      }
+
     });
     socketRef.current.on("user disconnect", ({ displayName }) => {
       setPlayers((curr) => curr.filter((val) => val !== displayName) );
