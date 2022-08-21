@@ -7,18 +7,21 @@ const io = require("socket.io")(server, {
     origin: "*",
   },
 });
-app.use(express.static(__dirname + "/build"));
-app.get("*", (req, res) => {
-  return res.sendFile("/build/index.html", { root: __dirname + "/" });
-});
+// app.use(express.static(__dirname + "/build"));
+// app.get("*", (req, res) => {
+//   return res.sendFile("/build/index.html", { root: __dirname + "/" });
+// });
 
 io.on("connection", (socket) => {
-  const { displayName, lobbyKey } = socket.handshake.query;
+  let { displayName, isHost, lobbyKey } = socket.handshake.query;
+  isHost = isHost === "true";
   socket.join(lobbyKey);
-  io.to(lobbyKey).emit("user connect", { displayName });
+  io.to(lobbyKey).emit("user connect", { displayName, isHost });
+  socket.on("update players", (players) => console.log(players));
 
   socket.on("disconnect", () => {
-    io.to(lobbyKey).emit("user disconnect", { displayName });
+    io.to(lobbyKey).emit("user disconnect", { displayName, isHost });
   });
 });
+
 server.listen(PORT, () => console.log("listening"));

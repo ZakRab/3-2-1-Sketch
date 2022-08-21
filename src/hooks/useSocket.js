@@ -1,23 +1,29 @@
 import { io } from "socket.io-client";
-import { useEffect, useState, useRef } from "react";
-const useSocket = (lobbyKey, displayName) => {
+import { useEffect, useState, useRef, useContext } from "react";
+import { LobbyContext } from "../context/LobbyContext";
+const useSocket = (lobbyKey) => {
+  const { host, displayName, activePlayer } = useContext(LobbyContext);
   const [players, setPlayers] = useState([]);
   const socketRef = useRef;
   useEffect(() => {
     socketRef.current = io("http://localhost:8080", {
-      query: { displayName, lobbyKey },
+      query: {
+        displayName: activePlayer.displayName,
+        isHost: activePlayer.isHost,
+        lobbyKey,
+      },
     });
-    socketRef.current.on("user connect", ({ displayName }) => {
-      if(displayName == host){
-        setPlayers((curr) => [displayName, ...curr]);
-        socketRef.current.emit(players)
-      }else{
-        socketRef.current.io
+    socketRef.current.on("user connect", (activePlayer) => {
+      console.log(activePlayer);
+      if (activePlayer.isHost) {
+        setPlayers((curr) => [activePlayer, ...curr]);
+        socketRef.current.emit("update players", { players });
       }
-
     });
-    socketRef.current.on("user disconnect", ({ displayName }) => {
-      setPlayers((curr) => curr.filter((val) => val !== displayName) );
+    socketRef.current.on("user disconnect", ({ activePlayer }) => {
+      setPlayers((curr) =>
+        curr.filter((val) => val.displayName !== activePlayer.displayName)
+      );
     });
   }, []);
 

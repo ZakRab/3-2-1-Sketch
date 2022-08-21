@@ -3,6 +3,10 @@ export const LobbyContext = React.createContext(null);
 
 export function LobbyProvider(props) {
   const [lobbyKey, setLobbyKey] = useState("");
+  const [activePlayer, setActivePlayer] = useState({
+    displayName: "",
+    isHost: false,
+  });
   const [displayName, setDisplayName] = useState("");
   const [host, setHost] = useState("");
   return (
@@ -10,10 +14,12 @@ export function LobbyProvider(props) {
       value={{
         lobbyKey,
         setLobbyKey,
-        setDisplayName,
-        displayName,
+        setActivePlayer,
+        activePlayer,
         setHost,
         host,
+        setDisplayName,
+        displayName,
       }}
     >
       {props.children}
