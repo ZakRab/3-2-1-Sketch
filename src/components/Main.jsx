@@ -26,7 +26,7 @@ const Main = () => {
   function lobbyCreater() {
     if (lobbyKey && displayName) {
       setActivePlayer({ displayName: displayName, isHost: true });
-      navigate(`/lobby/:${lobbyKey}`);
+      navigate(`/lobby/${lobbyKey}`);
     } else {
       console.log("please enter a display name and a lobby key");
     }
