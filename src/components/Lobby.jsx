@@ -14,6 +14,8 @@ const Lobby = () => {
         players.map((player, idx) => {
           return <div key={idx}> {player.displayName}</div>;
         })}
+
+       {activePlayer.isHost && <button>start game</button>}
     </>
   );
 };
