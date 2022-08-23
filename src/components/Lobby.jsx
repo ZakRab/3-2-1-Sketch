@@ -5,11 +5,10 @@ import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
 import Sketch from "./Sketch";
 const Lobby = () => {
-  const navigate = useNavigate();
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
   const { players, StartGame } = useSocket(lobbyKey);
-  const { RandTopic, RandCard, card } = useContext(GameContext);
+  const { RandCard, isStarted } = useContext(GameContext);
 
   function ClickHandler() {
     RandCard();
@@ -17,15 +16,19 @@ const Lobby = () => {
   }
   return (
     <>
-      <h1>Lobby{lobbyKey}</h1>
-      <h2>players</h2>
-      {players &&
-        players.map((player, idx) => {
-          return <div key={idx}> {player.displayName}</div>;
-        })}
-
-      {activePlayer.isHost && (
-        <button onClick={() => ClickHandler()}>start game</button>
+      {!isStarted && (
+        <>
+          {" "}
+          <h1>Lobby{lobbyKey}</h1>
+          <h2>players</h2>
+          {players &&
+            players.map((player, idx) => {
+              return <div key={idx}> {player.displayName}</div>;
+            })}
+          {activePlayer.isHost && (
+            <button onClick={() => ClickHandler()}>start game</button>
+          )}
+        </>
       )}
       <Sketch></Sketch>
     </>
