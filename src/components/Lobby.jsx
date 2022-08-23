@@ -2,12 +2,18 @@ import { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useSocket from "../hooks/useSocket";
 import { LobbyContext } from "../context/LobbyContext";
-import Sketch from './Sketch'
+import { GameContext } from "../context/GameContext";
+
 const Lobby = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
   const { players } = useSocket(lobbyKey);
+  const { RandTopic, RandCard, card } = useContext(GameContext);
+  function ClickHandler() {
+    RandCard();
+    navigate(`/sketch/${lobbyKey}`);
+  }
   return (
     <>
       <h1>Lobby{lobbyKey}</h1>
@@ -17,7 +23,9 @@ const Lobby = () => {
           return <div key={idx}> {player.displayName}</div>;
         })}
 
-       {activePlayer.isHost && <button onClick={()=>navigate(`/sketch/${lobbyKey}`)}>start game</button>}
+      {activePlayer.isHost && (
+        <button onClick={() => ClickHandler()}>start game</button>
+      )}
     </>
   );
 };

@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const { instrument } = require("@socket.io/admin-ui");
-const { emit } = require("process");
 const io = require("socket.io")(server, {
   cors: {
     origin: ["*", "https://admin.socket.io", "http://localhost:3000"],
