@@ -1,8 +1,10 @@
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useSocket from "../hooks/useSocket";
 import { LobbyContext } from "../context/LobbyContext";
+import Sketch from './Sketch'
 const Lobby = () => {
+  const navigate = useNavigate()
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
   const { players } = useSocket(lobbyKey);
@@ -15,7 +17,7 @@ const Lobby = () => {
           return <div key={idx}> {player.displayName}</div>;
         })}
 
-       {activePlayer.isHost && <button>start game</button>}
+       {activePlayer.isHost && <button onClick={()=>navigate(`/sketch/${lobbyKey}`)}>start game</button>}
     </>
   );
 };
