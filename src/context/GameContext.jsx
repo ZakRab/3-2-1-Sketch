@@ -13,13 +13,14 @@ export function GameProvider(props) {
     ["orc ", "goblin ", "troll"],
     ["odd ", "strange ", "weird"],
     ["mist ", "fog ", "smog"],
-    ["dumbledore ", "gandalf", "merlin"],
+    ["dumbledore ", "gandalf ", "merlin"],
   ];
   const [card, setCard] = useState([]);
-
+  const [isStarted, setIsStarted] = useState(false);
   function RandCard() {
     let rand = Math.floor(Math.random() * cards.length);
-    setCard(cards[rand]);
+    console.log(cards[rand]);
+    return cards[rand];
   }
 
   function RandTopic() {
@@ -32,6 +33,9 @@ export function GameProvider(props) {
         RandTopic,
         RandCard,
         card,
+        isStarted,
+        setIsStarted,
+        setCard,
       }}
     >
       {props.children}

@@ -23,6 +23,11 @@ io.on("connection", (socket) => {
     io.to(lobbyKey).emit("update players", players);
   });
 
+  socket.on("start-game", (card) => {
+    console.log(card);
+    io.to(lobbyKey).emit("start-game", card);
+  });
+
   socket.on("disconnect", () => {
     io.to(lobbyKey).emit("user disconnect", { displayName, isHost });
   });
