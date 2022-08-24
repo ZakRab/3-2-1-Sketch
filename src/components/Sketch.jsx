@@ -30,7 +30,7 @@ const Sketch = () => {
     .catch(e => {
       console.log(e);
     });
-  }, 11 * 1000);
+  }, 31 * 1000);
 
   return (
     <>
@@ -39,7 +39,7 @@ const Sketch = () => {
     <h2>Your topic: {userTopic}</h2>
     <CountdownCircleTimer
     isPlaying
-    duration={10}
+    duration={30}
     colors={['#004777', '#F7B801', '#A30000', '#A30000']}
     colorsTime={[30, 15, 5, 0]}
   >
