@@ -4,7 +4,14 @@ import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
 const useSocket = (lobbyKey) => {
   const { host, displayName, activePlayer } = useContext(LobbyContext);
-  const { setIsStarted, RandCard, setCard } = useContext(GameContext);
+  const {
+    setIsStarted,
+    RandCard,
+    setCard,
+    setUserSketches,
+    setIsSketching,
+    setIsVoting,
+  } = useContext(GameContext);
   const [players, setPlayers] = useState([]);
 
   const socketRef = useRef;
@@ -28,7 +35,7 @@ const useSocket = (lobbyKey) => {
 
     socketRef.current.on("start-game", (randCard) => {
       console.log(randCard);
-      setIsStarted(true);
+      setIsSketching(true);
       setCard(randCard);
     });
     socketRef.current.on("user disconnect", ({ displayName, isHost }) => {
@@ -47,6 +54,14 @@ const useSocket = (lobbyKey) => {
         setPlayers(newPlayers);
       }
     });
+
+    socketRef.current.on("receive-sketch", (userSketch) => {
+      setUserSketches((curr) => [...curr, userSketch]);
+    });
+    socketRef.current.on("reset-round", () => {
+      setIsSketching(true);
+      setIsVoting(false);
+    });
   }, [lobbyKey]);
 
   function StartGame() {
@@ -57,6 +72,10 @@ const useSocket = (lobbyKey) => {
   function SendSketch(userSketch) {
     socketRef.current.emit("send-sketch", userSketch);
   }
-  return { players, StartGame, SendSketch };
+  function ResetRound() {
+    StartGame();
+    socketRef.current.emit("reset-round");
+  }
+  return { players, StartGame, SendSketch, ResetRound };
 };
 export default useSocket;

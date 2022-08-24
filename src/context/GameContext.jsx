@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useSyncExternalStore } from "react";
 
 export const GameContext = React.createContext(null);
 export function GameProvider(props) {
@@ -16,7 +16,9 @@ export function GameProvider(props) {
     ["dumbledore ", "gandalf ", "merlin"],
   ];
   const [card, setCard] = useState([]);
-  const [isStarted, setIsStarted] = useState(false);
+  const [isSketching, setIsSketching] = useState(false);
+  const [isVoting, setIsVoting] = useState(false);
+  const [userSketches, setUserSketches] = useState([]);
   function RandCard() {
     let rand = Math.floor(Math.random() * cards.length);
     console.log(cards[rand]);
@@ -33,9 +35,13 @@ export function GameProvider(props) {
         RandTopic,
         RandCard,
         card,
-        isStarted,
-        setIsStarted,
+        isSketching,
+        setIsSketching,
         setCard,
+        isVoting,
+        setIsVoting,
+        setUserSketches,
+        userSketches,
       }}
     >
       {props.children}

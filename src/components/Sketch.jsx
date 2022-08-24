@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useRef, useState } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import {GameContext} from '../context/GameContext'
 import {LobbyContext} from '../context/LobbyContext'
@@ -11,30 +11,38 @@ const Sketch = () => {
   const { lobbyKey } = useParams();
   const {displayName} = useContext(LobbyContext)
   const { SendSketch, } = useSocket(lobbyKey);
-  const {RandTopic,card, isStarted} = useContext(GameContext)
+  const {RandTopic,card, setIsSketching, setIsVoting, setUserSketches, isSketching} = useContext(GameContext)
   const [userTopic, setUserTopic] = useState([])
+  const [countDown, setCountDown] = useState(30)
   let canvas = React.createRef();
+  let timeRef = useRef()
   useEffect(() => {
     setUserTopic(card[RandTopic()])
+    setUserSketches([])
   }, [card])
-  
- 
-  setTimeout(() => {
+useEffect(() => {
+  if(countDown > 0){
+      timeRef.current = setTimeout(() => {
+      setCountDown((curr) => curr - 1)
+      console.log(countDown);
+     }, 1000)}
+     else{
     canvas.current
     .exportImage("png")
     .then(data => {
-      console.log(data);
       SendSketch({sketch: data, displayName, userTopic })
-      console.log({sketch: data, displayName, userTopic });
+
     })
     .catch(e => {
       console.log(e);
     });
-  }, 31 * 1000);
+    setIsSketching(false)
+    setIsVoting(true)}
+return () => {clearTimeout(timeRef.current)}
+}, [countDown])
 
   return (
     <>
-  { isStarted && <>
   <h2>The card: {card}</h2>
     <h2>Your topic: {userTopic}</h2>
     <CountdownCircleTimer
@@ -54,7 +62,7 @@ const Sketch = () => {
           strokeColor="black"
         />
       </div>
-      </>}
+    
       
     </>
   );

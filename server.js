@@ -28,6 +28,14 @@ io.on("connection", (socket) => {
     io.to(lobbyKey).emit("start-game", card);
   });
 
+  socket.on("send-sketch", (userSketch) => {
+    console.log(userSketch);
+    io.to(lobbyKey).emit("receive-sketch", userSketch);
+  });
+  socket.on("reset-round", () => {
+    io.to(lobbyKey).emit("reset-round");
+  });
+
   socket.on("disconnect", () => {
     io.to(lobbyKey).emit("user disconnect", { displayName, isHost });
   });

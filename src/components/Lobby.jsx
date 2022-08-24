@@ -4,11 +4,12 @@ import useSocket from "../hooks/useSocket";
 import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
 import Sketch from "./Sketch";
+import Vote from "./Vote";
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
   const { players, StartGame } = useSocket(lobbyKey);
-  const { RandCard, isStarted } = useContext(GameContext);
+  const { RandCard, isSketching, isVoting } = useContext(GameContext);
 
   function ClickHandler() {
     RandCard();
@@ -16,9 +17,8 @@ const Lobby = () => {
   }
   return (
     <>
-      {!isStarted && (
+      {!isSketching && !isVoting && (
         <>
-          {" "}
           <h1>Lobby{lobbyKey}</h1>
           <h2>players</h2>
           {players &&
@@ -30,7 +30,8 @@ const Lobby = () => {
           )}
         </>
       )}
-      <Sketch></Sketch>
+      {isSketching && !isVoting && <Sketch></Sketch>}
+      {isVoting && !isSketching && <Vote></Vote>}
     </>
   );
 };
