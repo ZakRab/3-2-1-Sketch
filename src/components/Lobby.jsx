@@ -8,7 +8,7 @@ import Vote from "./Vote";
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
-  const { players, StartGame } = useSocket(lobbyKey);
+  const { players, StartGame, SendSketch, ResetRound } = useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting } = useContext(GameContext);
 
   function ClickHandler() {
@@ -30,8 +30,8 @@ const Lobby = () => {
           )}
         </>
       )}
-      {isSketching && !isVoting && <Sketch></Sketch>}
-      {isVoting && !isSketching && <Vote></Vote>}
+      {isSketching && !isVoting && <Sketch SendSketch={SendSketch}></Sketch>}
+      {isVoting && !isSketching && <Vote ResetRound={ResetRound}></Vote>}
     </>
   );
 };
