@@ -3,8 +3,7 @@ import { useEffect, useState, useRef, useContext } from "react";
 import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
 const useSocket = (lobbyKey) => {
-  const { activePlayer, rounds, setRounds, players, setPlayers } =
-    useContext(LobbyContext);
+  const { activePlayer, players, setPlayers } = useContext(LobbyContext);
 
   const {
     RandCard,
@@ -14,7 +13,7 @@ const useSocket = (lobbyKey) => {
     setIsVoting,
     setResults,
   } = useContext(GameContext);
-
+  const [rounds, setRounds] = useState(0);
   const socketRef = useRef;
   useEffect(() => {
     socketRef.current = io("http://localhost:8080", {
@@ -36,9 +35,9 @@ const useSocket = (lobbyKey) => {
     });
 
     socketRef.current.on("start-game", (randCard) => {
-      console.log(randCard);
       setIsSketching(true);
       setCard(randCard);
+      setRounds((curr) => curr + 1);
     });
     socketRef.current.on("user disconnect", ({ displayName, isHost }) => {
       if (activePlayer.isHost) {
@@ -60,11 +59,8 @@ const useSocket = (lobbyKey) => {
     socketRef.current.on("receive-sketch", (userSketch) => {
       setUserSketches((curr) => [...curr, userSketch]);
     });
-    socketRef.current.on("reset-round", (rounds) => {
-      setIsSketching(true);
-      setIsVoting(false);
+    socketRef.current.on("reset-round", () => {
       setResults(false);
-      setRounds(rounds);
     });
     socketRef.current.on("to-results", () => {
       setIsSketching(false);
@@ -83,11 +79,11 @@ const useSocket = (lobbyKey) => {
   }
   function ResetRound() {
     StartGame();
-    socketRef.current.emit("reset-round", rounds);
+    socketRef.current.emit("reset-round");
   }
   function ToResults() {
     socketRef.current.emit("to-results");
   }
-  return { players, StartGame, SendSketch, ResetRound, ToResults };
+  return { players, StartGame, SendSketch, ResetRound, ToResults, rounds };
 };
 export default useSocket;

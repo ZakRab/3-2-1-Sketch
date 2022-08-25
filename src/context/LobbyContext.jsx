@@ -10,7 +10,6 @@ export function LobbyProvider(props) {
   });
   const [displayName, setDisplayName] = useState("jan");
   const [host, setHost] = useState("");
-  const [rounds, setRounds] = useState(0);
   const [players, setPlayers] = useState([]);
 
   return (
@@ -24,8 +23,6 @@ export function LobbyProvider(props) {
         host,
         setDisplayName,
         displayName,
-        setRounds,
-        rounds,
         setPlayers,
         players,
       }}

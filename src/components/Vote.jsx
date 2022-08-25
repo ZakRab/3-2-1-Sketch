@@ -9,7 +9,7 @@ const Vote = ({ ToResults }) => {
 
   return (
     <>
-      <h1>Voting for round {rounds}</h1>
+      <h2>Vote</h2>
       {activePlayer.isHost && (
         <button onClick={() => ToResults()}>Round Results</button>
       )}

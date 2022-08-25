@@ -19,17 +19,15 @@ io.on("connection", (socket) => {
   socket.join(lobbyKey);
   io.to(lobbyKey).emit("user connect", { displayName, isHost });
   socket.on("update players", (players) => {
-    console.log(players);
     io.to(lobbyKey).emit("update players", players);
   });
 
-  socket.on("start-game", (card) => {
-    console.log(card);
-    io.to(lobbyKey).emit("start-game", card);
+  socket.on("start-game", (card, rounds) => {
+    console.log(rounds);
+    io.to(lobbyKey).emit("start-game", card, rounds);
   });
 
   socket.on("send-sketch", (userSketch) => {
-    console.log(userSketch);
     io.to(lobbyKey).emit("receive-sketch", userSketch);
   });
   socket.on("reset-round", (rounds) => {

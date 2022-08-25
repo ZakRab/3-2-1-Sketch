@@ -9,7 +9,7 @@ import Results from "./Results";
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
-  const { players, StartGame, SendSketch, ResetRound, ToResults } =
+  const { players, StartGame, SendSketch, ResetRound, ToResults, rounds} =
     useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting, isResults } =
     useContext(GameContext);
@@ -20,6 +20,7 @@ const Lobby = () => {
   }
   return (
     <>
+<h1>Round #{rounds}</h1>
       {!isSketching && !isVoting && !isResults && (
         <>
           <h1>Lobby{lobbyKey}</h1>
@@ -33,8 +34,8 @@ const Lobby = () => {
           )}
         </>
       )}
-      {isSketching && !isVoting && <Sketch SendSketch={SendSketch}></Sketch>}
-      {isVoting && !isSketching && <Vote ToResults={ToResults}></Vote>}
+      {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
+      {isVoting && <Vote ToResults={ToResults}></Vote>}
       {isResults && <Results ResetRound={ResetRound}></Results>}
     </>
   );
