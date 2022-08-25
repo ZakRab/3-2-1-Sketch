@@ -9,8 +9,15 @@ import Results from "./Results";
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
-  const { players, StartGame, SendSketch, ResetRound, ToResults, rounds} =
-    useSocket(lobbyKey);
+  const {
+    players,
+    StartGame,
+    SendSketch,
+    SendVote,
+    ResetRound,
+    ToResults,
+    rounds,
+  } = useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting, isResults } =
     useContext(GameContext);
 
@@ -20,22 +27,22 @@ const Lobby = () => {
   }
   return (
     <>
-<h1>Round #{rounds}</h1>
+      <h1>Round #{rounds}</h1>
       {!isSketching && !isVoting && !isResults && (
         <>
-      <h1>Lobby{lobbyKey}</h1>
-      <h2>players</h2>
-      {players &&
-        players.map((player, idx) => {
-          return <div key={idx}> {player.displayName}</div>;
-        })}
+          <h1>Lobby{lobbyKey}</h1>
+          <h2>players</h2>
+          {players &&
+            players.map((player, idx) => {
+              return <div key={idx}> {player.displayName}</div>;
+            })}
           {activePlayer.isHost && (
             <button onClick={() => ClickHandler()}>start game</button>
           )}
         </>
       )}
       {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
-      {isVoting && <Vote ToResults={ToResults}></Vote>}
+      {isVoting && <Vote ToResults={ToResults} SendVote={SendVote}></Vote>}
       {isResults && <Results ResetRound={ResetRound}></Results>}
     </>
   );

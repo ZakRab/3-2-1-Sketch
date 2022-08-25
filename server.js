@@ -30,6 +30,9 @@ io.on("connection", (socket) => {
   socket.on("send-sketch", (userSketch) => {
     io.to(lobbyKey).emit("receive-sketch", userSketch);
   });
+  socket.on("send-vote", (userVote) => {
+    io.to(lobbyKey).emit("receive-vote", userVote);
+  });
   socket.on("reset-round", (rounds) => {
     io.to(lobbyKey).emit("reset-round", rounds);
   });

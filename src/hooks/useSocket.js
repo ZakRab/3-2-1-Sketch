@@ -27,7 +27,6 @@ const useSocket = (lobbyKey) => {
       if (activePlayer.isHost) {
         setPlayers((curr) => {
           let players = [{ displayName, isHost, score: 0 }, ...curr];
-          console.log(players);
           socketRef.current.emit("update players", players);
           return players;
         });
@@ -59,6 +58,22 @@ const useSocket = (lobbyKey) => {
     socketRef.current.on("receive-sketch", (userSketch) => {
       setUserSketches((curr) => [...curr, userSketch]);
     });
+    socketRef.current.on("receive-vote", (userVote) => {
+      if (userVote.isCorrect) {
+        setPlayers((curr)=> curr.map((player)=>{
+          if ( player.displayName === userVote.voter || player.displayName === userVote.sketcher) {
+              player.score++
+          }return player
+        }))
+
+      } else if (!userVote.isCorrect) {
+        setPlayers((curr)=> curr.map((player)=>{
+          if ( player.displayName === userVote.voter) {
+              player.score--
+          }return player
+        }))
+      }
+    });
     socketRef.current.on("reset-round", () => {
       setResults(false);
     });
@@ -71,12 +86,15 @@ const useSocket = (lobbyKey) => {
 
   function StartGame() {
     let card = RandCard();
-    console.log(card);
     socketRef.current.emit("start-game", card);
   }
   function SendSketch(userSketch) {
     socketRef.current.emit("send-sketch", userSketch);
   }
+  function SendVote(userVote) {
+    socketRef.current.emit("send-vote", userVote);
+  }
+
   function ResetRound() {
     StartGame();
     socketRef.current.emit("reset-round");
@@ -84,6 +102,14 @@ const useSocket = (lobbyKey) => {
   function ToResults() {
     socketRef.current.emit("to-results");
   }
-  return { players, StartGame, SendSketch, ResetRound, ToResults, rounds };
+  return {
+    players,
+    StartGame,
+    SendSketch,
+    SendVote,
+    ResetRound,
+    ToResults,
+    rounds,
+  };
 };
 export default useSocket;

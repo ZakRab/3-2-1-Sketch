@@ -2,7 +2,7 @@ import React, { useContext, useInsertionEffect } from "react";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
 import VoteBlock from "./VoteBlock";
-const Vote = ({ ToResults }) => {
+const Vote = ({ ToResults, SendVote }) => {
   const { activePlayer, rounds, setPlayers, players } =
     useContext(LobbyContext);
   const { userSketches, card } = useContext(GameContext);
@@ -21,6 +21,7 @@ const Vote = ({ ToResults }) => {
               userSketch={userSketch}
               activePlayer={activePlayer}
               card={card}
+              SendVote={SendVote}
             />
           );
         })}
