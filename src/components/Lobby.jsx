@@ -23,12 +23,12 @@ const Lobby = () => {
 <h1>Round #{rounds}</h1>
       {!isSketching && !isVoting && !isResults && (
         <>
-          <h1>Lobby{lobbyKey}</h1>
-          <h2>players</h2>
-          {players &&
-            players.map((player, idx) => {
-              return <div key={idx}> {player.displayName}</div>;
-            })}
+      <h1>Lobby{lobbyKey}</h1>
+      <h2>players</h2>
+      {players &&
+        players.map((player, idx) => {
+          return <div key={idx}> {player.displayName}</div>;
+        })}
           {activePlayer.isHost && (
             <button onClick={() => ClickHandler()}>start game</button>
           )}
