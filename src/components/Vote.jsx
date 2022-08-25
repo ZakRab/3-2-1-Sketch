@@ -1,29 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useInsertionEffect } from "react";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
+import VoteBlock from "./VoteBlock";
+const Vote = ({ ToResults }) => {
+  const { activePlayer, rounds, setPlayers, players } =
+    useContext(LobbyContext);
+  const { userSketches, card } = useContext(GameContext);
 
-const Vote = ({ ResetRound }) => {
-  const { activePlayer } = useContext(LobbyContext);
-  const { userSketches } = useContext(GameContext);
-  console.log(userSketches);
   return (
     <>
-      <h1>Voting</h1>
+      <h1>Voting for round {rounds}</h1>
       {activePlayer.isHost && (
-        <button onClick={() => ResetRound()}>start next round</button>
+        <button onClick={() => ToResults()}>Round Results</button>
       )}
       {userSketches &&
         userSketches.map((userSketch, idx) => {
           return (
-            <div key={idx}>
-              <figure>
-                <img
-                  src={userSketch.sketch}
-                  alt={`${userSketch.displayName}'s sketch`}
-                />
-                <figcaption>{userSketch.displayName}</figcaption>
-              </figure>
-            </div>
+            <VoteBlock
+              key={idx}
+              userSketch={userSketch}
+              activePlayer={activePlayer}
+              card={card}
+            />
           );
         })}
     </>

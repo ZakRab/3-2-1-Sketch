@@ -6,9 +6,13 @@ export function LobbyProvider(props) {
   const [activePlayer, setActivePlayer] = useState({
     displayName: "",
     isHost: false,
+    score: 0,
   });
   const [displayName, setDisplayName] = useState("jan");
   const [host, setHost] = useState("");
+  const [rounds, setRounds] = useState(0);
+  const [players, setPlayers] = useState([]);
+
   return (
     <LobbyContext.Provider
       value={{
@@ -20,6 +24,10 @@ export function LobbyProvider(props) {
         host,
         setDisplayName,
         displayName,
+        setRounds,
+        rounds,
+        setPlayers,
+        players,
       }}
     >
       {props.children}

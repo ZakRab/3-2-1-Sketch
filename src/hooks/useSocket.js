@@ -3,16 +3,17 @@ import { useEffect, useState, useRef, useContext } from "react";
 import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
 const useSocket = (lobbyKey) => {
-  const { host, displayName, activePlayer } = useContext(LobbyContext);
+  const { activePlayer, rounds, setRounds, players, setPlayers } =
+    useContext(LobbyContext);
+
   const {
-    setIsStarted,
     RandCard,
     setCard,
     setUserSketches,
     setIsSketching,
     setIsVoting,
+    setResults,
   } = useContext(GameContext);
-  const [players, setPlayers] = useState([]);
 
   const socketRef = useRef;
   useEffect(() => {
@@ -26,9 +27,10 @@ const useSocket = (lobbyKey) => {
     socketRef.current.on("user connect", ({ displayName, isHost }) => {
       if (activePlayer.isHost) {
         setPlayers((curr) => {
-          let newPlayers = [{ displayName, isHost }, ...curr];
-          socketRef.current.emit("update players", newPlayers);
-          return newPlayers;
+          let players = [{ displayName, isHost, score: 0 }, ...curr];
+          console.log(players);
+          socketRef.current.emit("update players", players);
+          return players;
         });
       }
     });
@@ -58,9 +60,16 @@ const useSocket = (lobbyKey) => {
     socketRef.current.on("receive-sketch", (userSketch) => {
       setUserSketches((curr) => [...curr, userSketch]);
     });
-    socketRef.current.on("reset-round", () => {
+    socketRef.current.on("reset-round", (rounds) => {
       setIsSketching(true);
       setIsVoting(false);
+      setResults(false);
+      setRounds(rounds);
+    });
+    socketRef.current.on("to-results", () => {
+      setIsSketching(false);
+      setIsVoting(false);
+      setResults(true);
     });
   }, [lobbyKey]);
 
@@ -74,8 +83,11 @@ const useSocket = (lobbyKey) => {
   }
   function ResetRound() {
     StartGame();
-    socketRef.current.emit("reset-round");
+    socketRef.current.emit("reset-round", rounds);
   }
-  return { players, StartGame, SendSketch, ResetRound };
+  function ToResults() {
+    socketRef.current.emit("to-results");
+  }
+  return { players, StartGame, SendSketch, ResetRound, ToResults };
 };
 export default useSocket;

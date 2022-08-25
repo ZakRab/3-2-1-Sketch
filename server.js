@@ -32,8 +32,11 @@ io.on("connection", (socket) => {
     console.log(userSketch);
     io.to(lobbyKey).emit("receive-sketch", userSketch);
   });
-  socket.on("reset-round", () => {
-    io.to(lobbyKey).emit("reset-round");
+  socket.on("reset-round", (rounds) => {
+    io.to(lobbyKey).emit("reset-round", rounds);
+  });
+  socket.on("to-results", () => {
+    io.to(lobbyKey).emit("to-results");
   });
 
   socket.on("disconnect", () => {

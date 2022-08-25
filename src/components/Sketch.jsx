@@ -24,7 +24,7 @@ useEffect(() => {
     canvas.current
     .exportImage("png")
     .then(data => {
-      SendSketch({sketch: data, displayName, userTopic })
+      SendSketch({sketch: data, displayName, userTopic})
     })
     .catch(e => {
       console.log(e);

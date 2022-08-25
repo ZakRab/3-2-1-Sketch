@@ -1,15 +1,18 @@
 import { useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useSocket from "../hooks/useSocket";
 import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
 import Sketch from "./Sketch";
 import Vote from "./Vote";
+import Results from "./Results";
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
-  const { players, StartGame, SendSketch, ResetRound } = useSocket(lobbyKey);
-  const { RandCard, isSketching, isVoting } = useContext(GameContext);
+  const { players, StartGame, SendSketch, ResetRound, ToResults } =
+    useSocket(lobbyKey);
+  const { RandCard, isSketching, isVoting, isResults } =
+    useContext(GameContext);
 
   function ClickHandler() {
     RandCard();
@@ -17,7 +20,7 @@ const Lobby = () => {
   }
   return (
     <>
-      {!isSketching && !isVoting && (
+      {!isSketching && !isVoting && !isResults && (
         <>
           <h1>Lobby{lobbyKey}</h1>
           <h2>players</h2>
@@ -31,7 +34,8 @@ const Lobby = () => {
         </>
       )}
       {isSketching && !isVoting && <Sketch SendSketch={SendSketch}></Sketch>}
-      {isVoting && !isSketching && <Vote ResetRound={ResetRound}></Vote>}
+      {isVoting && !isSketching && <Vote ToResults={ToResults}></Vote>}
+      {isResults && <Results ResetRound={ResetRound}></Results>}
     </>
   );
 };

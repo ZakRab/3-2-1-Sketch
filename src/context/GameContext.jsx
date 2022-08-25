@@ -18,6 +18,7 @@ export function GameProvider(props) {
   const [card, setCard] = useState([]);
   const [isSketching, setIsSketching] = useState(false);
   const [isVoting, setIsVoting] = useState(false);
+  const [isResults, setResults] = useState(false);
   const [userSketches, setUserSketches] = useState([]);
   function RandCard() {
     let rand = Math.floor(Math.random() * cards.length);
@@ -42,6 +43,8 @@ export function GameProvider(props) {
         setIsVoting,
         setUserSketches,
         userSketches,
+        isResults,
+        setResults,
       }}
     >
       {props.children}
