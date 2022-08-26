@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { LobbyContext } from "../context/LobbyContext";
 import { useNavigate } from "react-router-dom";
 import randomString from "random-string";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Swal from "sweetalert2";
 
 const Main = () => {
   const {
@@ -9,22 +12,25 @@ const Main = () => {
     setLobbyKey,
     activePlayer,
     setActivePlayer,
-    host,
     displayName,
     setDisplayName,
-    setHost,
   } = useContext(LobbyContext);
   const navigate = useNavigate();
 
   function lobbyJoiner() {
-    if (lobbyKey) {
+    if (lobbyKey.length == 4) {
       setIsInLobby(true);
     } else {
-      alert("please enter a lobby key");
+      Swal.fire({
+        icon: "error",
+        title: "Lobby ID",
+        body: "Please enter 4 digit Lobby ID",
+        footer: "or create your own lobby",
+      });
     }
   }
 
-  function lobbyEnter(params) {
+  function lobbyEnter() {
     setActivePlayer({ displayName: displayName, isHost: isHosting });
     navigate(`/lobby/${lobbyKey}`);
   }
@@ -37,12 +43,12 @@ const Main = () => {
   const [isInLobby, setIsInLobby] = useState(false);
   const [isHosting, setIsHosting] = useState(false);
   return (
-    <>
+    <div className="center">
       <h1>Welcome to drawing game</h1>
       {!isInLobby && (
         <div>
-          <input
-            placeholder="Lobby ID"
+          <TextField
+            label="Lobby ID"
             id="lobbyKey"
             type="text"
             value={lobbyKey}
@@ -52,24 +58,32 @@ const Main = () => {
       )}
       {(isInLobby || isHosting) && (
         <div>
-          <input
+          <TextField
             id="displayName"
             type="text"
-            placeholder="Nickname"
+            label="Nickname"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
           />
         </div>
       )}
-      {!isInLobby && <button onClick={() => lobbyJoiner()}>Join</button>}
+      {!isInLobby && (
+        <Button variant="contained" onClick={() => lobbyJoiner()}>
+          Join
+        </Button>
+      )}
       {(isInLobby || isHosting) && (
-        <button onClick={() => lobbyEnter()}>Enter Lobby</button>
+        <Button variant="contained" onClick={() => lobbyEnter()}>
+          Enter Lobby
+        </Button>
       )}
 
       {!isHosting && (
-        <button onClick={() => lobbyCreater()}>Or Create Lobby as Host</button>
+        <Button variant="contained" onClick={() => lobbyCreater()}>
+          Or Create Lobby as Host
+        </Button>
       )}
-    </>
+    </div>
   );
 };
 

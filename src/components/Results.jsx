@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from "react";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
 import ResultBlock from "./ResultBlock";
+import Button from "@mui/material/Button";
 
 const Results = ({ ResetRound, rounds }) => {
   const { activePlayer, players, setPlayers, setDisplayName } =
@@ -36,16 +37,19 @@ const Results = ({ ResetRound, rounds }) => {
       <h1>{rounds >= 7 && "Final"} Results</h1>
       <>
         {rounds >= 7 && (
-          <button oncCLick={() => startNewGame()}>New Game?</button>
+          <Button variant="contained" oncCLick={() => startNewGame()}>
+            New Game?
+          </Button>
         )}
         {activePlayer.isHost && rounds < 7 && (
-          <button
+          <Button
+            variant="contained"
             onClick={() => {
               ResetRound();
             }}
           >
             Start Next Round
-          </button>
+          </Button>
         )}
 
         <table>

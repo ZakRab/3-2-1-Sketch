@@ -9,5 +9,34 @@ width: min-content;
 }
 .score-div{
     height: 70px;
-width: 200;
+    width: 200;
+}
+body{
+    background-image: url(../public/images/doodles.jpeg);
+    background-size: 110%;
+    background-position: center;
+}
+
+body, #root, html{
+    height: 100%;
+}
+.center{
+    margin:auto
+}
+footer{
+    width: 100%;
+    background-color: rgb(254, 254, 254);
+position: fixed;
+bottom: 0;
+}
+footer div{
+    position: fixed;
+    right: 0
+}
+.score-footer{
+    width: 100px;
+    height: 50px;
+    background-color: blue;
+    border-style: solid;
+    border-radius: 10px;
 }

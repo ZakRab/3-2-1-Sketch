@@ -1,6 +1,8 @@
 import React, { useContext, useInsertionEffect } from "react";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
+import Button from "@mui/material/Button";
+
 import VoteBlock from "./VoteBlock";
 const Vote = ({ ToResults, SendVote }) => {
   const { activePlayer, rounds, setPlayers, players } =
@@ -11,7 +13,9 @@ const Vote = ({ ToResults, SendVote }) => {
     <>
       <h2>Vote</h2>
       {activePlayer.isHost && (
-        <button onClick={() => ToResults()}>Round Results</button>
+        <Button variant="contained" onClick={() => ToResults()}>
+          Round Results
+        </Button>
       )}
       {userSketches &&
         userSketches.map((userSketch, idx) => {

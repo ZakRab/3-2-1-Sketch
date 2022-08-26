@@ -6,6 +6,8 @@ import { GameContext } from "../context/GameContext";
 import Sketch from "./Sketch";
 import Vote from "./Vote";
 import Results from "./Results";
+import Button from "@mui/material/Button";
+
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
@@ -37,13 +39,25 @@ const Lobby = () => {
               return <div key={idx}> {player.displayName}</div>;
             })}
           {activePlayer.isHost && (
-            <button onClick={() => ClickHandler()}>start game</button>
+            <Button variant="contained" onClick={() => ClickHandler()}>
+              start game
+            </Button>
           )}
         </>
       )}
       {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
       {isVoting && <Vote ToResults={ToResults} SendVote={SendVote}></Vote>}
       {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
+      <footer className="d-flex">
+        <h3>{activePlayer.displayName}</h3>
+        <Button variant="contained" className="d-inline">
+          {
+            players.filter((player) => {
+              return player.displayName == activePlayer.displayName;
+            }).score
+          }
+        </Button>
+      </footer>
     </>
   );
 };
