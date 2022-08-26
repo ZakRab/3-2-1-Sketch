@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { LobbyContext } from "../context/LobbyContext";
 
 const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
-  const [voteChoice, setVoteChoice] = useState(null);
+  const [voteChoice, setVoteChoice] = useState(card[0]);
   const [isDisabled, setIsDisabled] = useState(false);
   const { players } = useContext(LobbyContext);
   return (
@@ -15,6 +15,7 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
               disabled={isDisabled}
               name="voteChoice"
               id="voteChoice"
+              value={voteChoice}
               onChange={(e) => setVoteChoice(e.target.value)}
             >
               <option value={card[0]}>{card[0]}</option>
@@ -24,29 +25,20 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
             <button
               disabled={isDisabled}
               onClick={() => {
-                if (voteChoice == userSketch.userTopic) {
-                  setIsDisabled(true);
-                  console.log(players);
-                  let userVote = {
-                    voter: activePlayer.displayName,
-                    sketcher: userSketch.displayName,
-                    isCorrect: true,
-                    sketch: userSketch.sketch,
-                    sketchTopic: userSketch.userTopic,
-                  };
-                  SendVote(userVote);
-                } else {
-                  let userVote = {
-                    voter: activePlayer.displayName,
-                    sketcher: userSketch.displayName,
-                    isCorrect: false,
-                  };
-                  SendVote(userVote);
-                  setIsDisabled(true);
-                }
+                setIsDisabled(true);
+                console.log(voteChoice)
+                let userVote = {
+                  voter: activePlayer.displayName,
+                  sketcher: userSketch.displayName,
+                  isCorrect: voteChoice == userSketch.userTopic,
+                  sketch: userSketch.sketch,
+                  sketchTopic: userSketch.userTopic,
+                  voted: voteChoice,
+                };
+                SendVote(userVote);
               }}
             >
-              submit Vote
+              Submit Vote
             </button>
           </>
         )}

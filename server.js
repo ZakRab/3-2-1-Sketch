@@ -6,6 +6,7 @@ const { instrument } = require("@socket.io/admin-ui");
 const io = require("socket.io")(server, {
   cors: {
     origin: ["*", "https://admin.socket.io", "http://localhost:3000"],
+    credentials: true,
   },
 });
 // app.use(express.static(__dirname + "/build"));
@@ -47,4 +48,4 @@ io.on("connection", (socket) => {
 
 instrument(io, { auth: false });
 
-server.listen(PORT, () => console.log("listening"));
+server.listen(PORT, () => console.log("The server is up and running!"));

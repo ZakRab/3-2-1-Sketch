@@ -4,7 +4,6 @@ import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
 const useSocket = (lobbyKey) => {
   const { activePlayer, players, setPlayers } = useContext(LobbyContext);
-
   const {
     RandCard,
     setCard,
@@ -12,6 +11,7 @@ const useSocket = (lobbyKey) => {
     setIsSketching,
     setIsVoting,
     setResults,
+    setUserVotes,
   } = useContext(GameContext);
   const [rounds, setRounds] = useState(0);
   const socketRef = useRef;
@@ -59,19 +59,28 @@ const useSocket = (lobbyKey) => {
       setUserSketches((curr) => [...curr, userSketch]);
     });
     socketRef.current.on("receive-vote", (userVote) => {
+      setUserVotes((curr) => [...curr, userVote]);
       if (userVote.isCorrect) {
-        setPlayers((curr)=> curr.map((player)=>{
-          if ( player.displayName === userVote.voter || player.displayName === userVote.sketcher) {
-              player.score++
-          }return player
-        }))
-
+        setPlayers((curr) =>
+          curr.map((player) => {
+            if (
+              player.displayName === userVote.voter ||
+              player.displayName === userVote.sketcher
+            ) {
+              player.score++;
+            }
+            return player;
+          })
+        );
       } else if (!userVote.isCorrect) {
-        setPlayers((curr)=> curr.map((player)=>{
-          if ( player.displayName === userVote.voter) {
-              player.score--
-          }return player
-        }))
+        setPlayers((curr) =>
+          curr.map((player) => {
+            if (player.displayName === userVote.voter) {
+              player.score--;
+            }
+            return player;
+          })
+        );
       }
     });
     socketRef.current.on("reset-round", () => {
@@ -97,6 +106,7 @@ const useSocket = (lobbyKey) => {
 
   function ResetRound() {
     StartGame();
+    setUserVotes([]);
     socketRef.current.emit("reset-round");
   }
   function ToResults() {

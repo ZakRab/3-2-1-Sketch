@@ -43,7 +43,7 @@ const Lobby = () => {
       )}
       {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
       {isVoting && <Vote ToResults={ToResults} SendVote={SendVote}></Vote>}
-      {isResults && <Results ResetRound={ResetRound}></Results>}
+      {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
     </>
   );
 };

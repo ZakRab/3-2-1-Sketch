@@ -2,14 +2,13 @@ import React, { useCallback, useState } from "react";
 export const LobbyContext = React.createContext(null);
 
 export function LobbyProvider(props) {
-  const [lobbyKey, setLobbyKey] = useState("1234");
+  const [lobbyKey, setLobbyKey] = useState("");
   const [activePlayer, setActivePlayer] = useState({
     displayName: "",
     isHost: false,
     score: 0,
   });
-  const [displayName, setDisplayName] = useState("jan");
-  const [host, setHost] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [players, setPlayers] = useState([]);
 
   return (
@@ -19,8 +18,6 @@ export function LobbyProvider(props) {
         setLobbyKey,
         setActivePlayer,
         activePlayer,
-        setHost,
-        host,
         setDisplayName,
         displayName,
         setPlayers,
