@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LobbyContext } from "../context/LobbyContext";
 import { useNavigate } from "react-router-dom";
+import randomString from "random-string";
 
 const Main = () => {
   const {
@@ -16,45 +17,58 @@ const Main = () => {
   const navigate = useNavigate();
 
   function lobbyJoiner() {
-    if (lobbyKey && displayName) {
-      setActivePlayer({ displayName: displayName, isHost: false });
-      navigate(`/lobby/${lobbyKey}`);
+    if (lobbyKey) {
+      setIsInLobby(true);
     } else {
-      console.log("please enter a display name and a lobby key");
+      alert("please enter a lobby key");
     }
   }
+
+  function lobbyEnter(params) {
+    setActivePlayer({ displayName: displayName, isHost: isHosting });
+    navigate(`/lobby/${lobbyKey}`);
+  }
+
   function lobbyCreater() {
-    if (lobbyKey && displayName) {
-      setActivePlayer({ displayName: displayName, isHost: true });
-      navigate(`/lobby/${lobbyKey}`);
-    } else {
-      console.log("please enter a display name and a lobby key");
-    }
+    setLobbyKey(randomString({ length: 4, letters: false }));
+    setIsInLobby(true);
+    setIsHosting(true);
   }
+  const [isInLobby, setIsInLobby] = useState(false);
+  const [isHosting, setIsHosting] = useState(false);
   return (
     <>
       <h1>Welcome to drawing game</h1>
-      <div>
-        <label htmlFor="lobbyKey">Enter the Lobby Key</label>
-        <input
-          id="lobbyKey"
-          type="text"
-          value={lobbyKey}
-          onChange={(e) => setLobbyKey(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="displayName">Enter a Display Name</label>
-        <input
-          id="displayName"
-          type="text"
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
-        />
-      </div>
+      {!isInLobby && (
+        <div>
+          <input
+            placeholder="Lobby ID"
+            id="lobbyKey"
+            type="text"
+            value={lobbyKey}
+            onChange={(e) => setLobbyKey(e.target.value)}
+          />
+        </div>
+      )}
+      {(isInLobby || isHosting) && (
+        <div>
+          <input
+            id="displayName"
+            type="text"
+            placeholder="Nickname"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+          />
+        </div>
+      )}
+      {!isInLobby && <button onClick={() => lobbyJoiner()}>Join</button>}
+      {(isInLobby || isHosting) && (
+        <button onClick={() => lobbyEnter()}>Enter Lobby</button>
+      )}
 
-      <button onClick={() => lobbyJoiner()}>Join Lobby as participant</button>
-      <button onClick={() => lobbyCreater()}>Create Lobby as Host</button>
+      {!isHosting && (
+        <button onClick={() => lobbyCreater()}>Or Create Lobby as Host</button>
+      )}
     </>
   );
 };

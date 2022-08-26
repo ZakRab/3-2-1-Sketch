@@ -27,7 +27,7 @@ const Lobby = () => {
   }
   return (
     <>
-      <h1>Round #{rounds}</h1>
+      {(isSketching || isResults || isVoting) && <h1>Round #{rounds}</h1>}
       {!isSketching && !isVoting && !isResults && (
         <>
           <h1>Lobby{lobbyKey}</h1>
