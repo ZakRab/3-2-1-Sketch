@@ -70,12 +70,10 @@ const Results = ({ ResetRound, rounds }) => {
           {voteChoices.map((voteChoice) => {
             return voteChoice.isCorrect ? (
               <p>
-                {" "}
                 for {voteChoice.sketcher} you voted {voteChoice.voted} +1 point{" "}
               </p>
             ) : (
               <p>
-                {" "}
                 for {voteChoice.sketcher} you voted {voteChoice.voted} -1 point{" "}
               </p>
             );
