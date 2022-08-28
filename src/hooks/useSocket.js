@@ -16,7 +16,7 @@ const useSocket = (lobbyKey) => {
   const [rounds, setRounds] = useState(0);
   const socketRef = useRef;
   useEffect(() => {
-    socketRef.current = io("https://sketch-game321.herokuapp.com/", {
+    socketRef.current = io("https://sketch-game321.herokuapp.com", {
       query: {
         displayName: activePlayer.displayName,
         isHost: activePlayer.isHost,

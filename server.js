@@ -5,11 +5,7 @@ const server = require("http").createServer(app);
 const { instrument } = require("@socket.io/admin-ui");
 const io = require("socket.io")(server, {
   cors: {
-    origin: [
-      "*",
-      "https://admin.socket.io",
-      "https://sketch-game321.herokuapp.com/",
-    ],
+    origin: ["*", "https://admin.socket.io", "http://localhost:3000"],
     credentials: true,
   },
 });
