@@ -11,17 +11,19 @@ width: min-content;
     height: 70px;
     width: 200;
 }
+
 body{
     background-image: url(../public/images/doodles.jpeg);
-    background-size: 110%;
+    background-size: 70%;
+    background-repeat: repeat-x;
     background-position: center;
 }
 
 body, #root, html{
     height: 100%;
 }
-.center{
-    margin:auto
+.margin-auto{
+    margin:auto;
 }
 footer{
     width: 100%;
@@ -40,3 +42,70 @@ footer div{
     border-style: solid;
     border-radius: 10px;
 }
+  .main-margin{
+    margin: auto;
+    margin-top: 300px;
+    padding: 20px;
+    margin-bottom: 100px; 
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.498) 0px 5px 15px;
+    width: 40%;
+    background: linear-gradient(0deg, rgba(148,238,118,1) 4%, rgb(81 148 255) 100%);
+  }
+.main-flex{
+    justify-content: space-evenly;
+}
+.height150px{
+    height: 150px; 
+}
+
+.flex-grow{
+    flex-grow: 2;
+}
+.footer-gap{
+gap: 100%;
+}
+.vl{
+    width: 0;
+    border-right: 2px solid rgb(48, 48, 48);
+}
+.join-button{
+margin-top: 10px;
+}
+.margin-bottom{
+    margin-bottom: 20px;
+}
+.padding-top{
+    padding-top: 30px;
+}
+.tracking-in-expand {
+	-webkit-animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+.text-focus-in{animation:text-focus-in .5s cubic-bezier(.55,.085,.68,.53) both}
+
+@keyframes text-focus-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+@-webkit-keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

@@ -31,32 +31,36 @@ const Lobby = () => {
     <>
       {(isSketching || isResults || isVoting) && <h1>Round #{rounds}</h1>}
       {!isSketching && !isVoting && !isResults && (
-        <>
-          <h1>Lobby{lobbyKey}</h1>
-          <h2>players</h2>
-          {players &&
-            players.map((player, idx) => {
-              return <div key={idx}> {player.displayName}</div>;
-            })}
+        <div className="main-margin">
+          <h1>Lobby {lobbyKey}</h1>
+          <hr></hr>
+          <div className="height150px">
+            {players &&
+              players.map((player, idx) => {
+                return <div key={idx}> {player.displayName}</div>;
+              })}
+          </div>
           {activePlayer.isHost && (
             <Button variant="contained" onClick={() => ClickHandler()}>
               start game
             </Button>
           )}
-        </>
+        </div>
       )}
       {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
       {isVoting && <Vote ToResults={ToResults} SendVote={SendVote}></Vote>}
       {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
-      <footer className="d-flex">
+      <footer className="d-flex footer-gap">
         <h3>{activePlayer.displayName}</h3>
-        <Button variant="contained" className="d-inline">
-          {
-            players.filter((player) => {
-              return player.displayName == activePlayer.displayName;
-            }).score
-          }
-        </Button>
+        <div>
+          <Button variant="contained" className="d-inline">
+            {
+              players.filter((player) => {
+                return player.displayName == activePlayer.displayName;
+              }).score
+            }
+          </Button>
+        </div>
       </footer>
     </>
   );

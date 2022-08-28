@@ -19,6 +19,7 @@ const Main = () => {
 
   function lobbyJoiner() {
     if (lobbyKey.length == 4) {
+      setIsJoining(true);
       setIsInLobby(true);
     } else {
       Swal.fire({
@@ -31,8 +32,17 @@ const Main = () => {
   }
 
   function lobbyEnter() {
-    setActivePlayer({ displayName: displayName, isHost: isHosting });
-    navigate(`/lobby/${lobbyKey}`);
+    if (displayName) {
+      setActivePlayer({ displayName: displayName, isHost: isHosting });
+      navigate(`/lobby/${lobbyKey}`);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "No Display Name",
+        body: "Please enter a display name",
+        footer: "or sign in with google",
+      });
+    }
   }
 
   function lobbyCreater() {
@@ -42,47 +52,60 @@ const Main = () => {
   }
   const [isInLobby, setIsInLobby] = useState(false);
   const [isHosting, setIsHosting] = useState(false);
+  const [isJoining, setIsJoining] = useState(false);
   return (
-    <div className="center">
-      <h1>Welcome to drawing game</h1>
-      {!isInLobby && (
+    <div className=" main-margin">
+      <h1 className="text-center tracking-in-expand ">
+        Welcome to Doodle Game
+      </h1>
+      <div className="d-flex flex-row main-flex padding-top margin-bottom">
         <div>
-          <TextField
-            label="Lobby ID"
-            id="lobbyKey"
-            type="text"
-            value={lobbyKey}
-            onChange={(e) => setLobbyKey(e.target.value)}
-          />
+          {!isInLobby && (
+            <div className="">
+              <TextField
+                label="Lobby PIN"
+                id="lobbyKey"
+                type="text"
+                value={lobbyKey}
+                onChange={(e) => setLobbyKey(e.target.value)}
+              />
+            </div>
+          )}
+          {(isInLobby || isHosting) && (
+            <div className="text-focus-in">
+              <TextField
+                id="displayName"
+                type="text"
+                label="Name"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+              />
+            </div>
+          )}
+          {!isInLobby && (
+            <div className="text-center join-button">
+              <Button variant="contained" onClick={() => lobbyJoiner()}>
+                Join
+              </Button>
+            </div>
+          )}
         </div>
-      )}
-      {(isInLobby || isHosting) && (
-        <div>
-          <TextField
-            id="displayName"
-            type="text"
-            label="Nickname"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </div>
-      )}
-      {!isInLobby && (
-        <Button variant="contained" onClick={() => lobbyJoiner()}>
-          Join
-        </Button>
-      )}
-      {(isInLobby || isHosting) && (
-        <Button variant="contained" onClick={() => lobbyEnter()}>
-          Enter Lobby
-        </Button>
-      )}
-
-      {!isHosting && (
-        <Button variant="contained" onClick={() => lobbyCreater()}>
-          Or Create Lobby as Host
-        </Button>
-      )}
+        {(isInLobby || isHosting) && (
+          <div className="text-focus-in">
+            <Button variant="contained" onClick={() => lobbyEnter()}>
+              Enter Lobby
+            </Button>
+          </div>
+        )}
+        {!isInLobby && <div className="vl"></div>}
+        {!isHosting && !isJoining && (
+          <div className="padding-top ">
+            <Button variant="contained" onClick={() => lobbyCreater()}>
+              Create Lobby
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
