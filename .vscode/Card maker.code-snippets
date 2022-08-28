@@ -1,0 +1,9 @@
+{
+	"Sketch game card": {
+		"prefix": "sgc",
+		"body": [
+		  "[\"${1:card} \",\"${2:card} \",\"${3:card} \"],"
+		],
+		"description": "Sketch game card"
+	  }
+}
