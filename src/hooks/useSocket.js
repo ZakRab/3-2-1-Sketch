@@ -26,9 +26,9 @@ const useSocket = (lobbyKey) => {
     socketRef.current.on("user connect", ({ displayName, isHost }) => {
       if (activePlayer.isHost) {
         setPlayers((curr) => {
-          let players = [{ displayName, isHost, score: 0 }, ...curr];
-          socketRef.current.emit("update players", players);
-          return players;
+          let newPlayers = [...curr, { displayName, isHost, score: 0 }];
+          socketRef.current.emit("update players", newPlayers);
+          return newPlayers;
         });
       }
     });

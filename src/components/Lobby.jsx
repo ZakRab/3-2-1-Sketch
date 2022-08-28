@@ -29,15 +29,19 @@ const Lobby = () => {
   }
   return (
     <>
-      {(isSketching || isResults || isVoting) && <h1>Round #{rounds}</h1>}
       {!isSketching && !isVoting && !isResults && (
-        <div className="main-margin">
+        <div className="main-margin margin-center text-white bg-blue">
           <h1>Lobby {lobbyKey}</h1>
           <hr></hr>
-          <div className="height150px">
+          <div className="height150px d-flex flex-row flex-wrap main-flex">
             {players &&
               players.map((player, idx) => {
-                return <div key={idx}> {player.displayName}</div>;
+                return (
+                  <div className="bigger-font slide-in-right" key={idx}>
+                    {" "}
+                    {player.displayName.toUpperCase()}
+                  </div>
+                );
               })}
           </div>
           {activePlayer.isHost && (
@@ -50,17 +54,22 @@ const Lobby = () => {
       {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
       {isVoting && <Vote ToResults={ToResults} SendVote={SendVote}></Vote>}
       {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
-      <footer className="d-flex footer-gap">
-        <h3>{activePlayer.displayName}</h3>
-        <div>
-          <Button variant="contained" className="d-inline">
+      <footer className="d-flex top-border space-between">
+        <h2 className="margin-top-small">-{activePlayer.displayName}-</h2>
+        {(isSketching || isResults || isVoting) && (
+          <h2 className="margin-top-small">Round #{rounds}/7</h2>
+        )}
+        {rounds >= 2 && (
+          <h2 className="d-block text-black padding-small">
+            -
             {
               players.filter((player) => {
                 return player.displayName == activePlayer.displayName;
-              }).score
+              })[0].score
             }
-          </Button>
-        </div>
+            -
+          </h2>
+        )}
       </footer>
     </>
   );

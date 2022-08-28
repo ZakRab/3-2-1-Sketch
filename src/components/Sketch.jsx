@@ -15,7 +15,7 @@ const Sketch = ({ SendSketch }) => {
     isSketching,
   } = useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
-  const [countDown, setCountDown] = useState(5);
+  const [countDown, setCountDown] = useState(30);
   let canvas = React.createRef();
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
@@ -42,24 +42,34 @@ const Sketch = ({ SendSketch }) => {
 
   return (
     <>
-      <h2>The card: {card}</h2>
-      <h2>Your topic: {userTopic}</h2>
-      <CountdownCircleTimer
-        isPlaying
-        duration={30}
-        colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-        colorsTime={[30, 15, 5, 0]}
-      >
-        {({ remainingTime }) => remainingTime}
-      </CountdownCircleTimer>
-      <div className="border">
-        <ReactSketchCanvas
-          ref={canvas}
-          width="600px"
-          height="600px"
-          strokeWidth={2}
-          strokeColor="black"
-        />
+      <div className="margin-auto sketch bg-blue d-flex gap margin-center space-evenly padding-large flex-wrap ">
+        <div className="d-flex flex-column space-evenly text-center">
+          <div className="bg-white sketch padding-small margin-auto">
+            <h1>Draw: {userTopic}</h1>
+          </div>
+          <div className="bg-white sketch padding-small text-medium margin-auto">
+            <CountdownCircleTimer
+              isPlaying
+              duration={30}
+              colors={["#05c22e", "#ffea00", "#ff8800", "#dc0303"]}
+              colorsTime={[30, 15, 5, 0]}
+            >
+              {({ remainingTime }) => remainingTime}
+            </CountdownCircleTimer>
+          </div>
+          <div className="bg-white sketch  padding-small margin-auto">
+            <h1>Card: {card}</h1>
+          </div>
+        </div>
+        <div className="">
+          <ReactSketchCanvas
+            ref={canvas}
+            width="600px"
+            height="600px"
+            strokeWidth={2}
+            strokeColor="black"
+          />
+        </div>
       </div>
     </>
   );

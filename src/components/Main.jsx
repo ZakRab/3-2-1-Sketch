@@ -5,7 +5,7 @@ import randomString from "random-string";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Swal from "sweetalert2";
-
+import AccountCircle from "@mui/icons-material/AccountCircle";
 const Main = () => {
   const {
     lobbyKey,
@@ -54,15 +54,17 @@ const Main = () => {
   const [isHosting, setIsHosting] = useState(false);
   const [isJoining, setIsJoining] = useState(false);
   return (
-    <div className=" main-margin">
-      <h1 className="text-center tracking-in-expand ">
-        Welcome to Doodle Game
+    <div className="text-white main-margin margin-center">
+      <h1 className="text-center ">Welcome to</h1>
+      <h1 className="text-center tracking-in-expand text-large">
+        3-2-1 Sketch!
       </h1>
-      <div className="d-flex flex-row main-flex padding-top margin-bottom">
-        <div>
+      <div className="d-flex flex-row main-flex padding-top gap margin-bottom">
+        <div className="sketch bg-white padding-small">
           {!isInLobby && (
-            <div className="">
+            <div className="text">
               <TextField
+                sx={{ border: "1px solid white", borderRadius: 2 }}
                 label="Lobby PIN"
                 id="lobbyKey"
                 type="text"
@@ -73,6 +75,7 @@ const Main = () => {
           )}
           {(isInLobby || isHosting) && (
             <div className="text-focus-in">
+              <AccountCircle sx={{ color: "action.active", mr: 1, my: 2 }} />
               <TextField
                 id="displayName"
                 type="text"
@@ -85,18 +88,19 @@ const Main = () => {
           {!isInLobby && (
             <div className="text-center join-button">
               <Button variant="contained" onClick={() => lobbyJoiner()}>
-                Join
+                {"Join".toLowerCase()}
+              </Button>
+            </div>
+          )}
+          {(isInLobby || isHosting) && (
+            <div className="text-focus-in join-button">
+              <Button variant="contained" onClick={() => lobbyEnter()}>
+                Enter Lobby
               </Button>
             </div>
           )}
         </div>
-        {(isInLobby || isHosting) && (
-          <div className="text-focus-in">
-            <Button variant="contained" onClick={() => lobbyEnter()}>
-              Enter Lobby
-            </Button>
-          </div>
-        )}
+
         {!isInLobby && <div className="vl"></div>}
         {!isHosting && !isJoining && (
           <div className="padding-top ">

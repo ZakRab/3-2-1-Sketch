@@ -15,24 +15,12 @@ const ResultBlock = ({ userSketch }) => {
   return (
     <>
       <Card variant="outlined" sx={{ maxWidth: 600 }}>
-        <CardHeader
-          title={userSketch.displayName + " drew " + userSketch.userTopic}
-          variant="h3"
-        ></CardHeader>
-        <hr></hr>
         <CardMedia
           component="img"
           height="600"
           image={userSketch.sketch}
           alt={`${userSketch.displayName}'s sketch`}
         />
-        <CardContent>
-          <Typography variant="h4" component="div"></Typography>
-        </CardContent>
-        <hr></hr>
-        <CardActions>
-          <Button size="small">Share</Button>
-        </CardActions>
       </Card>
     </>
   );
