@@ -5,14 +5,18 @@ const server = require("http").createServer(app);
 const { instrument } = require("@socket.io/admin-ui");
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["*", "https://admin.socket.io", "http://localhost:3000"],
+    origin: [
+      "*",
+      "https://admin.socket.io",
+      "https://sketch-game321.herokuapp.com/",
+    ],
     credentials: true,
   },
 });
-// app.use(express.static(__dirname + "/build"));
-// app.get("*", (req, res) => {
-//   return res.sendFile("/build/index.html", { root: __dirname + "/" });
-// });
+app.use(express.static(__dirname + "/build"));
+app.get("*", (req, res) => {
+  return res.sendFile("/build/index.html", { root: __dirname + "/" });
+});
 
 io.on("connection", (socket) => {
   let { displayName, isHost, lobbyKey } = socket.handshake.query;
