@@ -15,7 +15,7 @@ const Sketch = ({ SendSketch }) => {
     isSketching,
   } = useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
-  const [countDown, setCountDown] = useState(30);
+  const [countDown, setCountDown] = useState(45);
   let canvas = React.createRef();
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
@@ -50,9 +50,9 @@ const Sketch = ({ SendSketch }) => {
           <div className="bg-white sketch padding-small text-medium margin-auto">
             <CountdownCircleTimer
               isPlaying
-              duration={30}
+              duration={45}
               colors={["#05c22e", "#ffea00", "#ff8800", "#dc0303"]}
-              colorsTime={[30, 15, 5, 0]}
+              colorsTime={[35, 20, 8, 0]}
             >
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
