@@ -16,7 +16,6 @@ export function GameProvider(props) {
     ["dog ", "dingo ", "wolf"],
     ["horse ", "donkey ", "zebra"],
     ["purse ", "handbag ", "clutch"],
-    ["dumbledore ", "gandalf ", "merlin"],
     ["curtain ", "drape ", "valance "],
     ["shrub ", "bush ", "hedge "],
     ["caiman ", "crocidile ", "alligator "],
