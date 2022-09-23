@@ -5,6 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@ionic/react": "^6.2.8",
+    "@ionic/react-router": "^6.2.8",
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.2",
     "@socket.io/admin-ui": "^0.4.0",
@@ -21,7 +23,6 @@
     "react-bootstrap": "^2.5.0",
     "react-countdown-circle-timer": "^3.0.9",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-sketch": "^0.5.1",
     "react-sketch-canvas": "^6.2.0",

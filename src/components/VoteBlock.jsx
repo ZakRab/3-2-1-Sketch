@@ -38,7 +38,6 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
                 disabled={isDisabled}
                 onClick={() => {
                   setIsDisabled(true);
-                  console.log(voteChoice);
                   let userVote = {
                     voter: activePlayer.displayName,
                     sketcher: userSketch.displayName,

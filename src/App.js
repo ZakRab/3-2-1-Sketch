@@ -9,6 +9,11 @@ import {
 } from "react-router-dom";
 import Sketch from "./components/Sketch";
 import Vote from "./components/Vote";
+import "@ionic/react/css/core.css";
+import "@ionic/react/css/normalize.css";
+import "@ionic/react/css/structure.css";
+import "@ionic/react/css/typography.css";
+
 function App() {
   return (
     <>

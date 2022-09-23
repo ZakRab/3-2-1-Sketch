@@ -24,7 +24,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("start-game", (card, rounds) => {
-    console.log(rounds);
     io.to(lobbyKey).emit("start-game", card, rounds);
   });
 
