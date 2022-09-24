@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { LobbyContext } from "../context/LobbyContext";
-import { useNavigate } from "react-router-dom";
+import { IonButton } from "@ionic/react";
 import randomString from "random-string";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,15 +10,13 @@ const Main = () => {
   const {
     lobbyKey,
     setLobbyKey,
-    activePlayer,
     setActivePlayer,
     displayName,
     setDisplayName,
   } = useContext(LobbyContext);
-  const navigate = useNavigate();
 
   function lobbyJoiner() {
-    if (lobbyKey.length == 4) {
+    if (lobbyKey.length === 4) {
       setIsJoining(true);
       setIsInLobby(true);
     } else {
@@ -34,7 +32,8 @@ const Main = () => {
   function lobbyEnter() {
     if (displayName) {
       setActivePlayer({ displayName: displayName, isHost: isHosting });
-      navigate(`/lobby/${lobbyKey}`);
+      history.push(`/lobby/${lobbyKey}`);
+      // navigate(`/lobby/${lobbyKey}`);
     } else {
       Swal.fire({
         icon: "error",
@@ -87,16 +86,16 @@ const Main = () => {
           )}
           {!isInLobby && (
             <div className="text-center join-button">
-              <Button variant="contained" onClick={() => lobbyJoiner()}>
+              <IonButton variant="contained" onClick={() => lobbyJoiner()}>
                 {"Join".toLowerCase()}
-              </Button>
+              </IonButton>
             </div>
           )}
           {(isInLobby || isHosting) && (
             <div className="text-focus-in join-button">
-              <Button variant="contained" onClick={() => lobbyEnter()}>
+              <IonButton variant="contained" onClick={() => lobbyEnter()}>
                 Enter Lobby
-              </Button>
+              </IonButton>
             </div>
           )}
         </div>

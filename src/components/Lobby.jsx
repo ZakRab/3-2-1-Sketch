@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import useSocket from "../hooks/useSocket";
 import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
@@ -64,7 +64,7 @@ const Lobby = () => {
             -
             {
               players.filter((player) => {
-                return player.displayName == activePlayer.displayName;
+                return player.displayName === activePlayer.displayName;
               })[0].score
             }
             -

@@ -41,7 +41,7 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
                   let userVote = {
                     voter: activePlayer.displayName,
                     sketcher: userSketch.displayName,
-                    isCorrect: voteChoice == userSketch.userTopic,
+                    isCorrect: voteChoice === userSketch.userTopic,
                     sketch: userSketch.sketch,
                     sketchTopic: userSketch.userTopic,
                     voted: voteChoice,

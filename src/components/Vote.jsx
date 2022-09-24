@@ -1,4 +1,4 @@
-import React, { useContext, useInsertionEffect } from "react";
+import React, { useContext } from "react";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
 import Button from "@mui/material/Button";
@@ -6,8 +6,7 @@ import Carousel from "react-bootstrap/Carousel";
 
 import VoteBlock from "./VoteBlock";
 const Vote = ({ ToResults, SendVote }) => {
-  const { activePlayer, rounds, setPlayers, players } =
-    useContext(LobbyContext);
+  const { activePlayer } = useContext(LobbyContext);
   const { userSketches, card } = useContext(GameContext);
 
   return (

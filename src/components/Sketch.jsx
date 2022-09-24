@@ -6,21 +6,15 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const Sketch = ({ SendSketch }) => {
   const { displayName } = useContext(LobbyContext);
-  const {
-    RandTopic,
-    card,
-    setIsSketching,
-    setIsVoting,
-    setUserSketches,
-    isSketching,
-  } = useContext(GameContext);
+  const { RandTopic, card, setIsSketching, setIsVoting, setUserSketches } =
+    useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
   const [countDown, setCountDown] = useState(30);
   let canvas = React.createRef();
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
     setUserSketches([]);
-  }, [card]);
+  }, [card, RandTopic, setUserSketches]);
   useEffect(() => {
     if (countDown > 0) {
       setTimeout(() => {

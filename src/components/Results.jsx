@@ -1,7 +1,8 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext } from "react";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+
 import ResultBlock from "./ResultBlock";
 import Button from "@mui/material/Button";
 import Carousel from "react-bootstrap/Carousel";
@@ -9,7 +10,7 @@ import Carousel from "react-bootstrap/Carousel";
 const Results = ({ ResetRound, rounds }) => {
   const { activePlayer, players, setPlayers, setDisplayName } =
     useContext(LobbyContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {
     userSketches,
@@ -34,7 +35,8 @@ const Results = ({ ResetRound, rounds }) => {
     setCard(null);
     setPlayers([]);
     setDisplayName(null);
-    navigate("/main");
+    // history.push("/main");
+    // navigate("/main");
   }
   return (
     <div className="margin-auto sketch  bg-blue padding-large margin-center d-flex flex-row gap ">
