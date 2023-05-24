@@ -30,7 +30,7 @@ const Lobby = () => {
   return (
     <>
       {!isSketching && !isVoting && !isResults && (
-        <div className="main-margin margin-center text-white bg-blue">
+        <div className="main-margin margin-center width-vw text-white bg-blue">
           <h1>Lobby {lobbyKey}</h1>
           <hr></hr>
           <div className="height150px d-flex flex-row flex-wrap main-flex">

@@ -29,12 +29,38 @@ body{
   .width-vw{
     width: 50vw;
   }
+  .button-size{
+    width: 50%;
+  }
+  .vl{
+    width: 0;
+    border-right: 2px solid rgb(255, 255, 255);
+}
+.main-flex{
+
+  flex-direction: row;
+    justify-content: space-evenly;
+}
 }
 @media screen and (max-width: 992px) {
   .width-vw{
-    width: 90vw;
+    width: 70vw;
+  }
+  .button-size{
+    width: 50%;
+  }
+  .vl{
+    width: 40vw;
+    height: 0;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    border-right: 2px  rgb(255, 255, 255)
+  }
+  .main-flex{
+    flex-direction: column;
+    align-items: center;
   }
 }
+
 
 
 body, #root, html{
@@ -73,9 +99,7 @@ footer div{
   }
  
 
-.main-flex{
-    justify-content: space-evenly;
-}
+
 .height150px{
     height: 150px; 
 }
@@ -95,10 +119,6 @@ width: 30%;
 .footer-gap{
 gap: 100%;
 }
-.vl{
-    width: 0;
-    border-right: 2px solid rgb(255, 255, 255);
-}
 
 .join-button{
 margin-top: 10px;
@@ -108,6 +128,9 @@ margin-top: 10px;
 }
 .padding-top{
     padding-top: 30px;
+}
+.padding-inherit{
+  padding: inherit;
 }
 .padding-large{
   padding: 50px;

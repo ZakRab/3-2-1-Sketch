@@ -59,7 +59,7 @@ const Main = () => {
       <h1 className="text-center tracking-in-expand text-large">
         3-2-1 Sketch!
       </h1>
-      <div className="d-flex flex-row main-flex padding-top gap margin-bottom">
+      <div className="d-flex main-flex center padding-top gap margin-bottom align-center">
         <div className="sketch bg-white padding-small">
           {!isInLobby && (
             <div className="text">
@@ -86,7 +86,7 @@ const Main = () => {
             </div>
           )}
           {!isInLobby && (
-            <div className="text-center join-button">
+            <div className="text-center center join-button">
               <Button variant="contained" onClick={() => lobbyJoiner()}>
                 {"Join".toLowerCase()}
               </Button>
@@ -101,9 +101,9 @@ const Main = () => {
           )}
         </div>
 
-        {!isInLobby && <div className="vl"></div>}
+        {!isInLobby && <div className="vl center"></div>}
         {!isHosting && !isJoining && (
-          <div className="padding-top ">
+          <div className="">
             <Button variant="contained" onClick={() => lobbyCreater()}>
               Create Lobby
             </Button>
