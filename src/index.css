@@ -167,9 +167,6 @@ margin-top: 10px;
 .space-evenly{
 justify-content: space-evenly;
 }
-.gap{
-  gap: 20px;
-}
 .bg-blue{
     background-color: #401e9e
 }

@@ -45,21 +45,12 @@ const Sketch = ({ SendSketch }) => {
 
   return (
     <>
-      <div className="margin-auto sketch width-vw bg-blue d-flex gap margin-center space-evenly padding-large flex-wrap ">
+      <div className="margin-auto sketch width-vw bg-blue d-flex margin-center space-evenly padding-large flex-wrap ">
         <div className="d-flex flex-column space-evenly text-center">
           <div className="bg-white sketch padding-small margin-auto">
             <h1>Draw: {userTopic}</h1>
           </div>
-          <div className="progressbar width-vw">
-            <div
-              style={{
-                height: "100%",
-                width: `${(countDown / 30) * 100}%`,
-                backgroundColor: "#401e9e",
-                transition: "width 1s",
-              }}
-            ></div>
-          </div>
+
           {/* <div className="bg-white sketch padding-small text-medium margin-auto">
             <CountdownCircleTimer
               isPlaying
@@ -73,6 +64,16 @@ const Sketch = ({ SendSketch }) => {
           <div className="bg-white sketch  padding-small margin-auto">
             <h1>Card: {card}</h1>
           </div>
+        </div>
+        <div className="progressbar width-vw">
+          <div
+            style={{
+              height: "100%",
+              width: `${(countDown / 30) * 100}%`,
+              backgroundColor: "#401e9e",
+              transition: "width 1s",
+            }}
+          ></div>
         </div>
         <div className="">
           <ReactSketchCanvas
