@@ -27,7 +27,7 @@ body{
 
 @media screen and (max-width: 2000px) {
   .width-vw{
-    width: 50vw;
+    width: 60vw;
   }
   .button-size{
     width: 50%;
@@ -57,7 +57,7 @@ body{
 }
 @media screen and (max-width: 992px) {
   .width-vw{
-    width: 90vw;
+    width: 95vw;
   }
   .button-size{
     width: 50%;
@@ -161,8 +161,9 @@ margin-top: 10px;
 .padding-scale{
   padding:5vw
 }
-
-
+.gap{
+  gap: 3vw;
+}
 
 .space-evenly{
 justify-content: space-evenly;
@@ -195,7 +196,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 .progressbar{
 	position: relative;
 	overflow: hidden;
-	height: 10px;
+	height: 5px;
 	background-color: #eee;
 }
 

@@ -3,6 +3,7 @@ import { ReactSketchCanvas } from "react-sketch-canvas";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { Topic } from "@mui/icons-material";
 
 const Sketch = ({ SendSketch }) => {
   const { displayName } = useContext(LobbyContext);
@@ -16,8 +17,7 @@ const Sketch = ({ SendSketch }) => {
   } = useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
   const [countDown, setCountDown] = useState(30);
-  const [viewWidth, setViewWidth] = useState(window.outerWidth.toString());
-  const [viewHeight, setViewHeight] = useState(window.outerHeight.toString());
+  const viewWidthw = window.screen.width;
   let canvas = React.createRef();
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
@@ -43,6 +43,12 @@ const Sketch = ({ SendSketch }) => {
     // }
   }, [countDown]);
 
+  function sketchPadSizing() {
+    if (viewWidthw > 922) {
+      return viewWidthw * 0.3;
+    } else return viewWidthw * 0.92;
+  }
+
   return (
     <>
       <div className="margin-auto sketch width-vw bg-blue d-flex margin-center space-evenly padding-large flex-wrap ">
@@ -62,7 +68,20 @@ const Sketch = ({ SendSketch }) => {
             </CountdownCircleTimer>
           </div> */}
           <div className="bg-white sketch  padding-small margin-auto">
-            <h1>Card: {card}</h1>
+            {card.map((topic) => {
+              console.log(topic);
+              <></>;
+            })}
+            <h1>
+              Card:{card}
+              {/* {card.map((topic, idx) => {
+                topic == userTopic ? (
+                  <strong key={idx}>{topic}</strong>
+                ) : (
+                  <span key={idx}>{topic}</span>
+                );
+              })} */}
+            </h1>
           </div>
         </div>
         <div className="progressbar width-vw">
@@ -78,7 +97,7 @@ const Sketch = ({ SendSketch }) => {
         <div className="">
           <ReactSketchCanvas
             ref={canvas}
-            width={viewWidth}
+            width={sketchPadSizing()}
             height="400px"
             strokeWidth={2}
             strokeColor="black"
