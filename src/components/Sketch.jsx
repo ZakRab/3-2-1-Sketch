@@ -16,6 +16,8 @@ const Sketch = ({ SendSketch }) => {
   } = useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
   const [countDown, setCountDown] = useState(30);
+  const [viewWidth, setViewWidth] = useState(window.outerWidth.toString());
+  const [viewHeight, setViewHeight] = useState(window.outerHeight.toString());
   let canvas = React.createRef();
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
@@ -26,28 +28,39 @@ const Sketch = ({ SendSketch }) => {
       setTimeout(() => {
         setCountDown((curr) => curr - 1);
       }, 1000);
-    } else {
-      canvas.current
-        .exportImage("png")
-        .then((data) => {
-          SendSketch({ sketch: data, displayName, userTopic });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-      setIsSketching(false);
-      setIsVoting(true);
     }
+    // else {
+    //   canvas.current
+    //     .exportImage("png")
+    //     .then((data) => {
+    //       SendSketch({ sketch: data, displayName, userTopic });
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    //   setIsSketching(false);
+    //   setIsVoting(true);
+    // }
   }, [countDown]);
 
   return (
     <>
-      <div className="margin-auto sketch bg-blue d-flex gap margin-center space-evenly padding-large flex-wrap ">
+      <div className="margin-auto sketch width-vw bg-blue d-flex gap margin-center space-evenly padding-large flex-wrap ">
         <div className="d-flex flex-column space-evenly text-center">
           <div className="bg-white sketch padding-small margin-auto">
             <h1>Draw: {userTopic}</h1>
           </div>
-          <div className="bg-white sketch padding-small text-medium margin-auto">
+          <div className="progressbar width-vw">
+            <div
+              style={{
+                height: "100%",
+                width: `${(countDown / 30) * 100}%`,
+                backgroundColor: "#401e9e",
+                transition: "width 1s",
+              }}
+            ></div>
+          </div>
+          {/* <div className="bg-white sketch padding-small text-medium margin-auto">
             <CountdownCircleTimer
               isPlaying
               duration={30}
@@ -56,7 +69,7 @@ const Sketch = ({ SendSketch }) => {
             >
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
-          </div>
+          </div> */}
           <div className="bg-white sketch  padding-small margin-auto">
             <h1>Card: {card}</h1>
           </div>
@@ -64,8 +77,8 @@ const Sketch = ({ SendSketch }) => {
         <div className="">
           <ReactSketchCanvas
             ref={canvas}
-            width="600px"
-            height="600px"
+            width={viewWidth}
+            height={viewWidth}
             strokeWidth={2}
             strokeColor="black"
           />

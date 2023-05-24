@@ -37,7 +37,7 @@ const Results = ({ ResetRound, rounds }) => {
     navigate("/main");
   }
   return (
-    <div className="margin-auto sketch  bg-blue padding-large margin-center d-flex flex-row gap ">
+    <div className="margin-auto sketch  bg-blue padding-large margin-center d-flex flex-row gap width-vw ">
       <div className="text-center">
         <h1 className="text-white text-medium-large">
           {rounds >= 7 && "Final"} -Results-

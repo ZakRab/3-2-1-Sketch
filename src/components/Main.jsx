@@ -55,7 +55,6 @@ const Main = () => {
   const [isJoining, setIsJoining] = useState(false);
   return (
     <div className="text-white main-margin width-vw margin-center">
-      <h1 className="text-center ">Welcome to</h1>
       <h1 className="text-center tracking-in-expand text-large">
         3-2-1 Sketch!
       </h1>
