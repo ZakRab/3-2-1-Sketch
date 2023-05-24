@@ -198,7 +198,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 .progressbar{
 	position: relative;
 	overflow: hidden;
-	height: 35px;
+	height: 10px;
 	background-color: #eee;
 }
 
