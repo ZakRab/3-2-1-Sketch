@@ -16,7 +16,7 @@ const useSocket = (lobbyKey) => {
   const [rounds, setRounds] = useState(0);
   const socketRef = useRef;
   useEffect(() => {
-    socketRef.current = io("https://321Sketch.onrender.com/", {
+    socketRef.current = io("https://three21sketch.onrender.com", {
       query: {
         displayName: activePlayer.displayName,
         isHost: activePlayer.isHost,
