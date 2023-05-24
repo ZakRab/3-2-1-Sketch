@@ -24,6 +24,19 @@ body{
 
 
 }
+
+@media screen and (max-width: 2000px) {
+  .width-vw{
+    width: 50vw;
+  }
+}
+@media screen and (max-width: 992px) {
+  .width-vw{
+    width: 90vw;
+  }
+}
+
+
 body, #root, html{
     height: 100%;
 }
@@ -31,7 +44,7 @@ body, #root, html{
     margin:auto;
 }
 .text-large{
-  font-size: 100px;
+  font-size: 10vh;
 }
 footer{
     width: 100%;
@@ -56,9 +69,10 @@ footer div{
     margin-bottom: 100px; 
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.498) 0px 5px 15px;
-    width: 40%;
     background-color: #401e9e
   }
+ 
+
 .main-flex{
     justify-content: space-evenly;
 }
