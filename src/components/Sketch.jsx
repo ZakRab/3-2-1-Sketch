@@ -78,7 +78,7 @@ const Sketch = ({ SendSketch }) => {
           <ReactSketchCanvas
             ref={canvas}
             width={viewWidth}
-            height={viewWidth}
+            height="400px"
             strokeWidth={2}
             strokeColor="black"
           />
