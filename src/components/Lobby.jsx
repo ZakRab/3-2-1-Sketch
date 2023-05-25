@@ -54,6 +54,8 @@ const Lobby = () => {
       {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
       {isVoting && <Vote ToResults={ToResults} SendVote={SendVote}></Vote>}
       {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
+      <div className="footer-filler">
+      </div>
       <footer className="d-flex top-border space-between">
         <h2 className="margin-top-small">-{activePlayer.displayName}-</h2>
         {(isSketching || isResults || isVoting) && (

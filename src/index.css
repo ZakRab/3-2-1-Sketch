@@ -99,7 +99,11 @@ body, #root, html{
 .margin-auto{
     margin:auto;
 }
-
+.footer-filler{
+  height: 75px;
+  position: static;
+  bottom: 0;
+}
 footer{
     width: 100%;
     background-color: rgb(254, 254, 254);
