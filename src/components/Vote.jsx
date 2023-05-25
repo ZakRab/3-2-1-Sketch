@@ -12,14 +12,14 @@ const Vote = ({ ToResults, SendVote }) => {
 
   return (
     <>
-      <div className=" margin-auto sketch bg-blue  margin-center width-vw padding">
-        <div className="text-white text-center"></div>
-        <div className="min-carsosuel">
+      <div className=" margin-auto sketch bg-blue margin-auto margin-center width-vw padding">
+        <div className="text-white text-center margin-auto"></div>
+        <div className="width-vw margin-auto">
           <Carousel variant="dark" interval={null}>
             {userSketches &&
               userSketches.map((userSketch, idx) => {
                 return (
-                  <Carousel.Item>
+                  <Carousel.Item className="d-flex">
                     <VoteBlock
                       key={idx}
                       userSketch={userSketch}

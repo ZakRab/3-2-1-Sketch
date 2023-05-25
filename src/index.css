@@ -184,10 +184,6 @@ html, body {margin: 0; height: 100%; overflow: hidden}
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.498) 0px 5px 15px;
 }
-.min-carsosuel{
-  width: 600px;
-  min-height: 600px;
-}
 
 .padding-small{
   padding: 15px;
