@@ -36,12 +36,11 @@ const Results = ({ ResetRound, rounds }) => {
     setDisplayName(null);
     navigate("/main");
   }
+  const viewWidthw = window.screen.width;
+
   return (
-    <div className="margin-auto sketch  bg-blue padding-large margin-center d-flex flex-row gap width-vw ">
+    <div className="margin-auto sketch bg-blue padding-large margin-center flex-media d-flex gap width-vw ">
       <div className="text-center">
-        <h1 className="text-white text-medium-large">
-          {rounds >= 7 && "Final"} -Results-
-        </h1>
         <div className="text-center margin-auto text-black bg-white sketch text-medium padding-small">
           {rounds >= 7 && (
             <Button variant="contained" onClick={() => startNewGame()}>
@@ -94,7 +93,7 @@ const Results = ({ ResetRound, rounds }) => {
           )}
         </div>
       </div>
-      <div className="min-carsosuel">
+      <div className=" ">
         <Carousel variant="dark" interval={null}>
           {userSketches.map((userSketch) => {
             return (

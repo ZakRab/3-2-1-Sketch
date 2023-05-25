@@ -12,7 +12,7 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const { players } = useContext(LobbyContext);
   return (
-    <div className="tracking-in-expand">
+    <div className="tracking-in-expand margin-auto">
       <Card variant="outlined" sx={{ maxWidth: 600 }}>
         {activePlayer.displayName !== userSketch.displayName && (
           <div className="text-center">
@@ -57,7 +57,6 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
         )}
         <CardMedia
           component="img"
-          height="600"
           image={userSketch.sketch}
           alt={`${userSketch.displayName}'s sketch`}
         />

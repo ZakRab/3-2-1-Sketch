@@ -12,12 +12,17 @@ import CardHeader from "@mui/material/CardHeader";
 const ResultBlock = ({ userSketch }) => {
   const { activePlayer, players } = useContext(LobbyContext);
   const { userSketches, userVotes } = useContext(GameContext);
+  const viewWidthw = window.screen.width;
+  function sketchPadSizing() {
+    if (viewWidthw > 922) {
+      return viewWidthw * 0.3;
+    } else return viewWidthw * 0.92;
+  }
   return (
     <>
-      <Card variant="outlined" sx={{ maxWidth: 600 }}>
+      <Card variant="outlined" sx={sketchPadSizing()}>
         <CardMedia
           component="img"
-          height="600"
           image={userSketch.sketch}
           alt={`${userSketch.displayName}'s sketch`}
         />
