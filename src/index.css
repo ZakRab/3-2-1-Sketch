@@ -24,15 +24,77 @@ body{
 
 
 }
+
+@media screen and (max-width: 2000px) {
+  .width-vw{
+    width: 60vw;
+  }
+  .button-size{
+    width: 50%;
+  }
+  .vl{
+    width: 0;
+    border-right: 2px solid rgb(255, 255, 255);
+}
+.main-flex{
+
+  flex-direction: row;
+    justify-content: space-evenly;
+}
+.text-large{
+  font-size: 10vw;
+}
+.text-medium-large{
+  font-size: 5vw;
+}
+.text-medium{
+  font-size: 3vw;
+}
+.margin-center{
+  margin-top: 20vw;
+}
+
+}
+@media screen and (max-width: 900px) {
+  .width-vw{
+    width: 100vw;
+  }
+  .button-size{
+    width: 50%;
+  }
+  .vl{
+    width: 40vw;
+    height: 0;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    border-right: 2px  rgb(255, 255, 255)
+  }
+  .main-flex{
+    flex-direction: column;
+    align-items: center;
+  }
+  .text-large{
+    font-size: 20vw;
+  }
+  .text-medium-large{
+    font-size: 15vw;
+  }
+  .text-medium{
+    font-size: 10vw;
+  }
+  .margin-center{
+    margin-top: 0px;
+  }
+}
+
+
+
 body, #root, html{
     height: 100%;
 }
 .margin-auto{
     margin:auto;
 }
-.text-large{
-  font-size: 100px;
-}
+
 footer{
     width: 100%;
     background-color: rgb(254, 254, 254);
@@ -56,12 +118,11 @@ footer div{
     margin-bottom: 100px; 
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.498) 0px 5px 15px;
-    width: 40%;
     background-color: #401e9e
   }
-.main-flex{
-    justify-content: space-evenly;
-}
+ 
+
+
 .height150px{
     height: 150px; 
 }
@@ -81,10 +142,6 @@ width: 30%;
 .footer-gap{
 gap: 100%;
 }
-.vl{
-    width: 0;
-    border-right: 2px solid rgb(255, 255, 255);
-}
 
 .join-button{
 margin-top: 10px;
@@ -95,20 +152,21 @@ margin-top: 10px;
 .padding-top{
     padding-top: 30px;
 }
+.padding-inherit{
+  padding: inherit;
+}
 .padding-large{
-  padding: 50px;
+  padding: 1vw;
 }
-.margin-center{
-  margin-top: 60px;
-}
-.bigger-font{
-  font-size: 30px;
-}
-.space-evenly{
-justify-content: space-evenly;
+.padding-scale{
+  padding:5vw
 }
 .gap{
-  gap: 20px;
+  gap: 3vw;
+}
+
+.space-evenly{
+justify-content: space-evenly;
 }
 .bg-blue{
     background-color: #401e9e
@@ -116,27 +174,25 @@ justify-content: space-evenly;
 .top-border{
   border-top: black solid 3px;
 }
-.text-medium-large{
-  font-size: 60px;
-}
-.text-medium{
-  font-size: 30px;
-}
+
+
 .margin-top-small{
   margin-top: 15px;
 }
 .sketch{
-  width: max-content;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.498) 0px 5px 15px;
-}
-.min-carsosuel{
-  width: 600px;
-  min-height: 600px;
 }
 
 .padding-small{
   padding: 15px;
+}
+
+.progressbar{
+	position: relative;
+	overflow: hidden;
+	height: 5px;
+	background-color: #eee;
 }
 
 .scale-in-hor-center{animation:scale-in-hor-center .5s cubic-bezier(.25,.46,.45,.94) both}
