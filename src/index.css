@@ -20,12 +20,14 @@ body{
     background-size: cover;
     background-position: center;
     font-family: 'Amatic SC', cursive;
-
-
-
 }
 
 @media screen and (max-width: 2000px) {
+ 
+  .flex-media{
+    flex-direction: row;
+  }
+
   .width-vw{
     width: 60vw;
   }
@@ -53,9 +55,16 @@ body{
 .margin-center{
   margin-top: 20vw;
 }
+html, body {margin: 0; height: 100%; overflow: hidden}
+
 
 }
 @media screen and (max-width: 900px) {
+html, body {margin: 0; height: 100%; overflow:auto}
+
+.flex-media{
+  flex-direction: column-reverse;
+}
   .width-vw{
     width: 100vw;
   }
@@ -120,7 +129,9 @@ footer div{
     box-shadow: rgba(0, 0, 0, 0.498) 0px 5px 15px;
     background-color: #401e9e
   }
- 
+ .footer-height{
+  height: 100px;
+ }
 
 
 .height150px{
@@ -162,7 +173,7 @@ margin-top: 10px;
   padding:5vw
 }
 .gap{
-  gap: 3vw;
+  gap: 2vw;
 }
 
 .space-evenly{
@@ -175,7 +186,6 @@ justify-content: space-evenly;
   border-top: black solid 3px;
 }
 
-html, body {margin: 0; height: 100%; overflow: hidden}
 
 .margin-top-small{
   margin-top: 15px;
