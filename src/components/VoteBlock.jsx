@@ -11,9 +11,15 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
   const [voteChoice, setVoteChoice] = useState(card[0]);
   const [isDisabled, setIsDisabled] = useState(false);
   const { players } = useContext(LobbyContext);
+  const viewWidthw = window.screen.width;
+  function sketchPadSizing() {
+    if (viewWidthw > 922) {
+      return viewWidthw * 0.3;
+    } else return viewWidthw * 0.92;
+  }
   return (
     <div className="tracking-in-expand margin-auto">
-      <Card variant="outlined" sx={{ maxWidth: 600 }}>
+      <Card variant="outlined" sx={sketchPadSizing()}>
         {activePlayer.displayName !== userSketch.displayName && (
           <div className="text-center">
             <CardActions>
