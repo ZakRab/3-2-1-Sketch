@@ -28,19 +28,18 @@ const Sketch = ({ SendSketch }) => {
       setTimeout(() => {
         setCountDown((curr) => curr - 1);
       }, 1000);
+    } else {
+      canvas.current
+        .exportImage("png")
+        .then((data) => {
+          SendSketch({ sketch: data, displayName, userTopic });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      setIsSketching(false);
+      setIsVoting(true);
     }
-    // else {
-    //   canvas.current
-    //     .exportImage("png")
-    //     .then((data) => {
-    //       SendSketch({ sketch: data, displayName, userTopic });
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    //   setIsSketching(false);
-    //   setIsVoting(true);
-    // }
   }, [countDown]);
 
   function sketchPadSizing() {
