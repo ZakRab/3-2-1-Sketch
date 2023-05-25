@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Carousel from "react-bootstrap/Carousel";
 
 const Results = ({ ResetRound, rounds }) => {
-  const { activePlayer, players, setPlayers, setDisplayName } =
+  const { activePlayer, players, setPlayers, setDisplayName, setLobbyKey } =
     useContext(LobbyContext);
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ const Results = ({ ResetRound, rounds }) => {
     setPlayers([]);
     setDisplayName(null);
     navigate("/main");
+    setLobbyKey(null);
   }
   return (
     <div className="margin-auto sketch bg-blue padding-large margin-center d-flex flex-row gap width-vw space-evenly">
