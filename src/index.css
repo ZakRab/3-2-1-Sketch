@@ -55,9 +55,9 @@ body{
 }
 
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 900px) {
   .width-vw{
-    width: 95vw;
+    width: 100vw;
   }
   .button-size{
     width: 50%;

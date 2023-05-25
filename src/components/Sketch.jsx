@@ -53,10 +53,6 @@ const Sketch = ({ SendSketch }) => {
     <>
       <div className="margin-auto sketch width-vw bg-blue d-flex margin-center space-evenly padding-large flex-wrap ">
         <div className="d-flex flex-column space-evenly text-center">
-          <div className="bg-white sketch padding-small margin-auto">
-            <h1>Draw: {userTopic}</h1>
-          </div>
-
           {/* <div className="bg-white sketch padding-small text-medium margin-auto">
             <CountdownCircleTimer
               isPlaying
@@ -67,21 +63,18 @@ const Sketch = ({ SendSketch }) => {
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
           </div> */}
-          <div className="bg-white sketch width-vw padding-small margin-auto">
-            {card.map((topic) => {
-              console.log(topic);
-              <></>;
-            })}
-            <h1>
-              Card:{card}
-              {/* {card.map((topic, idx) => {
+          <div className="bg-white sketch padding-small margin-auto margin-bottom">
+            <span className="text-medium">
+              {card.map((topic, idx) =>
                 topic == userTopic ? (
-                  <strong key={idx}>{topic}</strong>
+                  <span style={{ color: "blue" }} key={idx}>
+                    {topic}
+                  </span>
                 ) : (
-                  <span key={idx}>{topic}</span>
-                );
-              })} */}
-            </h1>
+                  <span key={topic}>{topic}</span>
+                )
+              )}
+            </span>
             <div className="progressbar ">
               <div
                 style={{
