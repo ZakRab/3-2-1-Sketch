@@ -19,7 +19,7 @@ const Vote = ({ ToResults, SendVote }) => {
             {userSketches &&
               userSketches.map((userSketch, idx) => {
                 return (
-                  <Carousel.Item className="d-flex">
+                  <Carousel.Item>
                     <VoteBlock
                       key={idx}
                       userSketch={userSketch}
