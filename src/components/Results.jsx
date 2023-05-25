@@ -37,78 +37,86 @@ const Results = ({ ResetRound, rounds }) => {
     navigate("/main");
   }
   return (
-    <div className="margin-auto sketch  bg-blue padding-large margin-center d-flex flex-row gap width-vw ">
+    <div className="margin-auto sketch bg-blue padding-large margin-center d-flex flex-row gap width-vw space-evenly">
       <div className="text-center">
         <h1 className="text-white text-medium">
           {rounds >= 7 && "Final"} -Results-
         </h1>
-        <div className="text-center margin-auto text-black bg-white sketch text-medium padding-small">
-          {rounds >= 7 && (
-            <Button variant="contained" onClick={() => startNewGame()}>
-              New Game?
-            </Button>
-          )}
+        <div className="d-flex flex-media gap ">
+          <div className="text-center text-black bg-white sketch text-medium padding-small">
+            {rounds >= 7 && (
+              <Button variant="contained" onClick={() => startNewGame()}>
+                New Game?
+              </Button>
+            )}
 
-          <table className="margin-auto">
-            <thead>
-              <tr>
-                <th>Player-</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {players.map((player) => {
-                return (
-                  <tr>
-                    <td>{player.displayName}</td>
-                    <td>{player.score}</td>
-                  </tr>
+            <table className="margin-auto">
+              <thead>
+                <tr>
+                  <th>Player-</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {players.map((player) => {
+                  return (
+                    <tr>
+                      <td>{player.displayName}</td>
+                      <td>{player.score}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <div className="score-overflow score-div">
+              {voteChoices.map((voteChoice) => {
+                return voteChoice.isCorrect ? (
+                  <p>
+                    for {voteChoice.sketcher} you voted {voteChoice.voted} +1
+                    point{" "}
+                  </p>
+                ) : (
+                  <p>
+                    for {voteChoice.sketcher} you voted {voteChoice.voted} -1
+                    point{" "}
+                  </p>
                 );
               })}
-            </tbody>
-          </table>
-          <div className="score-overflow score-div ">
-            {voteChoices.map((voteChoice) => {
-              return voteChoice.isCorrect ? (
-                <p>
-                  for {voteChoice.sketcher} you voted {voteChoice.voted} +1
-                  point{" "}
-                </p>
-              ) : (
-                <p>
-                  for {voteChoice.sketcher} you voted {voteChoice.voted} -1
-                  point{" "}
-                </p>
-              );
-            })}
+            </div>
+            {activePlayer.isHost && rounds < 7 && (
+              <div className="margin-top-small">
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    ResetRound();
+                  }}
+                >
+                  Start Next Round
+                </Button>
+              </div>
+            )}
           </div>
-          {activePlayer.isHost && rounds < 7 && (
-            <Button
-              variant="contained"
-              onClick={() => {
-                ResetRound();
-              }}
-            >
-              Start Next Round
-            </Button>
-          )}
+          <div className="">
+            <Carousel variant="dark" interval={null}>
+              {userSketches.map((userSketch) => {
+                return (
+                  <Carousel.Item>
+                    <ResultBlock userSketch={userSketch} />
+                    <Carousel.Caption>
+                      <h1>
+                        -
+                        {userSketch.displayName +
+                          " drew " +
+                          userSketch.userTopic}
+                        -
+                      </h1>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                );
+              })}
+            </Carousel>
+          </div>
         </div>
-      </div>
-      <div className="min-carsosuel">
-        <Carousel variant="dark" interval={null}>
-          {userSketches.map((userSketch) => {
-            return (
-              <Carousel.Item>
-                <ResultBlock userSketch={userSketch} />
-                <Carousel.Caption>
-                  <h1>
-                    -{userSketch.displayName + " drew " + userSketch.userTopic}-
-                  </h1>
-                </Carousel.Caption>
-              </Carousel.Item>
-            );
-          })}
-        </Carousel>
       </div>
     </div>
   );

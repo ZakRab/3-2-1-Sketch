@@ -37,7 +37,6 @@ body{
     border-right: 2px solid rgb(255, 255, 255);
 }
 .main-flex{
-
   flex-direction: row;
     justify-content: space-evenly;
 }
@@ -52,6 +51,9 @@ body{
 }
 .margin-center{
   margin-top: 20vw;
+}
+.flex-media{
+  flex-direction: row;
 }
 
 }
@@ -83,6 +85,9 @@ body{
   }
   .margin-center{
     margin-top: 0px;
+  }
+  .flex-media{
+    flex-direction: column-reverse;
   }
 }
 
@@ -175,7 +180,7 @@ justify-content: space-evenly;
   border-top: black solid 3px;
 }
 
-html, body {margin: 0; height: 100%; overflow: hidden}
+html, body {margin: 0; height: 100%;}
 
 .margin-top-small{
   margin-top: 15px;
