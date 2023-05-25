@@ -12,7 +12,7 @@ const Vote = ({ ToResults, SendVote }) => {
 
   return (
     <>
-      <div className=" margin-auto sketch bg-blue margin-auto margin-center width-vw padding">
+      <div className=" margin-auto sketch bg-blue margin-auto margin-center width-vw padding-large">
         <div className="text-white text-center margin-auto"></div>
         <div className="width-vw margin-auto">
           <Carousel variant="dark" interval={null}>
