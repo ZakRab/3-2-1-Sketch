@@ -13,9 +13,7 @@ const Vote = ({ ToResults, SendVote }) => {
   return (
     <>
       <div className=" margin-auto sketch bg-blue  margin-center width-vw padding">
-        <div className="text-white text-center">
-          <h1 className="text-medium">-Vote-</h1>
-        </div>
+        <div className="text-white text-center"></div>
         <div className="min-carsosuel">
           <Carousel variant="dark" interval={null}>
             {userSketches &&
