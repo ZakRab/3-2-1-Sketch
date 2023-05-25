@@ -67,7 +67,7 @@ const Sketch = ({ SendSketch }) => {
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
           </div> */}
-          <div className="bg-white sketch  padding-small margin-auto">
+          <div className="bg-white sketch width-vw padding-small margin-auto">
             {card.map((topic) => {
               console.log(topic);
               <></>;
@@ -82,17 +82,17 @@ const Sketch = ({ SendSketch }) => {
                 );
               })} */}
             </h1>
+            <div className="progressbar ">
+              <div
+                style={{
+                  height: "100%",
+                  width: `${(countDown / 30) * 100}%`,
+                  backgroundColor: "#401e9e",
+                  transition: "width 1s",
+                }}
+              ></div>
+            </div>
           </div>
-        </div>
-        <div className="progressbar width-vw">
-          <div
-            style={{
-              height: "100%",
-              width: `${(countDown / 30) * 100}%`,
-              backgroundColor: "#401e9e",
-              transition: "width 1s",
-            }}
-          ></div>
         </div>
         <div className="">
           <ReactSketchCanvas
