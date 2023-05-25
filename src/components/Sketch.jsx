@@ -78,7 +78,7 @@ const Sketch = ({ SendSketch }) => {
               <div
                 style={{
                   height: "100%",
-                  width: `${(countDown / 30) * 100}%`,
+                  width: `${(countDown / 45) * 100}%`,
                   backgroundColor: "#401e9e",
                   transition: "width 1s",
                 }}
