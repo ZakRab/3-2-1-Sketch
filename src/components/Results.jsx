@@ -41,7 +41,7 @@ const Results = ({ ResetRound, rounds }) => {
     <div className="margin-auto sketch bg-blue padding-large margin-center d-flex flex-row gap width-vw space-evenly">
       <div className="text-center">
         <h1 className="text-white text-medium">
-          {rounds >= 7 && "Final"} -Results-
+          {rounds >= 7 && "Final "} Results
         </h1>
         <div className="d-flex flex-media gap ">
           <div className="text-center text-black bg-white sketch text-medium padding-small">

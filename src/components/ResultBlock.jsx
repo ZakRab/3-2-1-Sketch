@@ -16,7 +16,7 @@ const ResultBlock = ({ userSketch }) => {
   const sketchPadSize = viewWidthw > 900 ? viewWidthw * 0.5 : viewWidthw * 0.92;
 
   return (
-    <>
+    <div className="tracking-in-expand">
       <Card variant="outlined" sx={{ sketchPadSize }}>
         <CardMedia
           component="img"
@@ -24,7 +24,7 @@ const ResultBlock = ({ userSketch }) => {
           alt={`${userSketch.displayName}'s sketch`}
         />
       </Card>
-    </>
+    </div>
   );
 };
 
