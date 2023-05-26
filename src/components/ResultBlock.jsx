@@ -13,14 +13,11 @@ const ResultBlock = ({ userSketch }) => {
   const { activePlayer, players } = useContext(LobbyContext);
   const { userSketches, userVotes } = useContext(GameContext);
   const viewWidthw = window.screen.width;
-  function sketchPadSizing() {
-    if (viewWidthw > 900) {
-      return viewWidthw * 0.5;
-    } else return viewWidthw * 0.92;
-  }
+  const sketchPadSize = viewWidthw > 900 ? viewWidthw * 0.5 : viewWidthw * 0.92;
+
   return (
     <>
-      <Card variant="outlined" sx={sketchPadSizing()}>
+      <Card variant="outlined" sx={{ sketchPadSize }}>
         <CardMedia
           component="img"
           image={userSketch.sketch}

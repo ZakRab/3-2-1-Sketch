@@ -99,10 +99,10 @@ const Results = ({ ResetRound, rounds }) => {
           </div>
           <div className="">
             <Carousel variant="dark" interval={null}>
-              {userSketches.map((userSketch) => {
+              {userSketches.map((userSketch, idx) => {
                 return (
-                  <Carousel.Item>
-                    <ResultBlock userSketch={userSketch} />
+                  <Carousel.Item key={idx}>
+                    <ResultBlock key={idx} userSketch={userSketch} />
                     <Carousel.Caption>
                       <h1>
                         -

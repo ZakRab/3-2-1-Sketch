@@ -6,7 +6,7 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { Topic } from "@mui/icons-material";
 
 const Sketch = ({ SendSketch }) => {
-  const { displayName } = useContext(LobbyContext);
+  const { displayName, players } = useContext(LobbyContext);
   const {
     RandTopic,
     card,
@@ -16,9 +16,10 @@ const Sketch = ({ SendSketch }) => {
     isSketching,
   } = useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
-  const [countDown, setCountDown] = useState(30);
+  const [countDown, setCountDown] = useState(5);
   const viewWidthw = window.screen.width;
   let canvas = React.createRef();
+
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
     setUserSketches([]);
