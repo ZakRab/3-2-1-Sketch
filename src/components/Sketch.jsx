@@ -4,6 +4,14 @@ import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { Topic } from "@mui/icons-material";
+import { useRadioGroup } from "@mui/material/RadioGroup";
+import {
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormLabel,
+  FormControl,
+} from "@mui/material";
 
 const Sketch = ({ SendSketch }) => {
   const { displayName, players } = useContext(LobbyContext);
@@ -19,7 +27,7 @@ const Sketch = ({ SendSketch }) => {
   const [countDown, setCountDown] = useState(45);
   const viewWidthw = window.screen.width;
   let canvas = React.createRef();
-
+  const [color, setColor] = useState("black");
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
     setUserSketches([]);
@@ -79,21 +87,114 @@ const Sketch = ({ SendSketch }) => {
               <div
                 style={{
                   height: "100%",
-                  width: `${(countDown / 30) * 100}%`,
+                  width: `${(countDown / 45) * 100}%`,
                   backgroundColor: "#401e9e",
                   transition: "width 1s",
                 }}
               ></div>
             </div>
           </div>
+          <div className="margin-auto">
+            <FormControl>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="black"
+                row
+                name="radio-buttons-group"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+              >
+                <FormControlLabel
+                  value="black"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "black",
+                        "&.Mui-checked": {
+                          color: "black",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+                <FormControlLabel
+                  value="red"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "red",
+                        "&.Mui-checked": {
+                          color: "red",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+                <FormControlLabel
+                  value="orange"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "orange",
+                        "&.Mui-checked": {
+                          color: "orange",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+                <FormControlLabel
+                  value="blue"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "blue",
+                        "&.Mui-checked": {
+                          color: "blue",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+                <FormControlLabel
+                  value="green"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "green",
+                        "&.Mui-checked": {
+                          color: "green",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
         </div>
-        <div className="">
+        <div className="canvas">
           <ReactSketchCanvas
             ref={canvas}
             width={sketchPadSizing()}
             height={sketchPadSizing()}
             strokeWidth={2}
-            strokeColor="black"
+            strokeColor={color}
           />
         </div>
       </div>
