@@ -41,7 +41,6 @@ const Lobby = () => {
               players.map((player, idx) => {
                 return (
                   <div className="slide-in-right text-center" key={idx}>
-                    {" "}
                     {player.displayName.toUpperCase()}
                   </div>
                 );
