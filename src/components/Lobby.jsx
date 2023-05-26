@@ -19,10 +19,13 @@ const Lobby = () => {
     ResetRound,
     ToResults,
     rounds,
+    ReadyPlayer,
+    readies,
+    setReadies,
   } = useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting, isResults } =
     useContext(GameContext);
-
+  console.log(players);
   function ClickHandler() {
     RandCard();
     StartGame();
@@ -52,10 +55,17 @@ const Lobby = () => {
         </div>
       )}
       {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
-      {isVoting && <Vote ToResults={ToResults} SendVote={SendVote}></Vote>}
+      {isVoting && (
+        <Vote
+          ToResults={ToResults}
+          ReadyPlayer={ReadyPlayer}
+          SendVote={SendVote}
+          setReadies={setReadies}
+          readies={readies}
+        ></Vote>
+      )}
       {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
-      <div className="footer-filler">
-      </div>
+      <div className="footer-filler"></div>
       <footer className="d-flex top-border space-between">
         <h2 className="margin-top-small">-{activePlayer.displayName}-</h2>
         {(isSketching || isResults || isVoting) && (

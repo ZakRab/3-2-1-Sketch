@@ -33,7 +33,12 @@ const Main = () => {
 
   function lobbyEnter() {
     if (displayName) {
-      setActivePlayer({ displayName: displayName, isHost: isHosting });
+      setActivePlayer({
+        displayName: displayName,
+        isHost: isHosting,
+        score: 0,
+        isReady: false,
+      });
       navigate(`/lobby/${lobbyKey}`);
     } else {
       Swal.fire({
