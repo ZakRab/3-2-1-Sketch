@@ -16,7 +16,7 @@ const Sketch = ({ SendSketch }) => {
     isSketching,
   } = useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
-  const [countDown, setCountDown] = useState(5);
+  const [countDown, setCountDown] = useState(45);
   const viewWidthw = window.screen.width;
   let canvas = React.createRef();
 
