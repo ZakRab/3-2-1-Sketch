@@ -33,14 +33,14 @@ const Lobby = () => {
   return (
     <>
       {!isSketching && !isVoting && !isResults && (
-        <div className="main-margin margin-center width-vw text-white bg-blue">
+        <div className="main-margin text-white bg-blue">
           <h1>Lobby {lobbyKey}</h1>
           <hr></hr>
-          <div className="text-medium d-flex flex-row flex-wrap main-flex">
+          <div className="text-medium d-flex flex-column flex-wrap ">
             {players &&
               players.map((player, idx) => {
                 return (
-                  <div className="slide-in-right" key={idx}>
+                  <div className="slide-in-right text-center" key={idx}>
                     {" "}
                     {player.displayName.toUpperCase()}
                   </div>
