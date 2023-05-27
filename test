@@ -1,0 +1,25 @@
+let players = [
+  { displayName: "jacob", score: 3 },
+  { displayName: "akdslf", score: 5 },
+  { displayName: "zak", score: 9 },
+];
+
+let activePlayer = { displayName: "jacob", score: 3 };
+let highestScorePlayer;
+function IsAWinner() {
+  players.map((player, idx) => {
+    if (!highestScorePlayer) {
+      highestScorePlayer = player;
+    } else if (player.score > highestScorePlayer.score) {
+      highestScorePlayer = player;
+    }
+    if (
+      idx == players.length - 1 &&
+      highestScorePlayer.displayName == activePlayer.displayName
+    ) {
+      return true;
+    } else return false;
+  });
+}
+
+console.log(IsAWinner());

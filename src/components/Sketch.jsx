@@ -20,7 +20,7 @@ const Sketch = ({ SendSketch }) => {
   const viewWidthw = window.screen.width;
   let canvas = React.createRef();
   const [color, setColor] = useState("black");
-  const sound = useMemo(
+  const pencilSound = useMemo(
     () =>
       new Howl({
         src: [require("../components/audio/pencil-sound.mp3")],
@@ -29,11 +29,31 @@ const Sketch = ({ SendSketch }) => {
       }),
     []
   );
+  const popSound = useMemo(
+    () =>
+      new Howl({
+        src: [require("../components/audio/pop-sound.mp3")],
+        html5: true,
+        volume: 1,
+        rate: 5,
+      }),
+    []
+  );
+  const tickingSound = useMemo(
+    () =>
+      new Howl({
+        src: [require("../components/audio/ticking-sound.mp3")],
+        html5: true,
+        volume: 1,
+        rate: 1,
+      }),
+    []
+  );
 
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
     setUserSketches([]);
-    sound.pause();
+    pencilSound.pause();
   }, [card]);
 
   useEffect(() => {
@@ -52,6 +72,13 @@ const Sketch = ({ SendSketch }) => {
         });
       setIsSketching(false);
       setIsVoting(true);
+    }
+    if (countDown === 10) {
+      tickingSound.play();
+      console.log("10 seconds left");
+    }
+    if (countDown === 8) {
+      tickingSound.pause();
     }
   }, [countDown]);
 
@@ -96,7 +123,7 @@ const Sketch = ({ SendSketch }) => {
                 row
                 name="radio-buttons-group"
                 value={color}
-                onChange={(e) => setColor(e.target.value)}
+                onChange={(e) => (setColor(e.target.value), popSound.play())}
               >
                 <FormControlLabel
                   value="black"
@@ -183,10 +210,10 @@ const Sketch = ({ SendSketch }) => {
           </div>
         </div>
         <ButtonBase
-          onMouseDown={() => sound.play()}
-          onTouchStart={() => sound.play()}
-          onMouseUp={() => sound.pause()}
-          onTouchEnd={() => sound.pause()}
+          onMouseDown={() => pencilSound.play()}
+          onTouchStart={() => pencilSound.play()}
+          onMouseUp={() => pencilSound.pause()}
+          onTouchEnd={() => pencilSound.pause()}
           className="canvas"
           disableRipple
         >

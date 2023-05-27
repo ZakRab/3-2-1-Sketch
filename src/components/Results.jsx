@@ -1,10 +1,11 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
 import { useNavigate } from "react-router-dom";
 import ResultBlock from "./ResultBlock";
 import Button from "@mui/material/Button";
 import Carousel from "react-bootstrap/Carousel";
+import ConfettiExplosion from "react-confetti-explosion";
 
 const Results = ({ ResetRound, rounds }) => {
   const { activePlayer, players, setPlayers, setDisplayName, setLobbyKey } =
@@ -37,6 +38,22 @@ const Results = ({ ResetRound, rounds }) => {
     navigate("/main");
     setLobbyKey(null);
   }
+  const [isExploding, setIsExploding] = useState(false);
+
+  useEffect(() => {
+    if (rounds === 7 && Winner() == activePlayer.displayName) {
+      setIsExploding(true);
+    }
+  }, [rounds]);
+
+  function Winner() {
+    let playersArr = players;
+    playersArr.sort((a, b) => {
+      return a.score - b.score;
+    });
+    return playersArr[0].displayName;
+  }
+
   return (
     <div
       className="margin-auto sketch bg-blue padding-large 
@@ -45,6 +62,14 @@ const Results = ({ ResetRound, rounds }) => {
       <div className="text-center">
         <h1 className="text-white text-medium">
           {rounds >= 7 && "Final "} Results
+          {isExploding && (
+            <ConfettiExplosion
+              force={0.7}
+              duration={4000}
+              particleCount={250}
+              width={2000}
+            />
+          )}
         </h1>
         <div className="d-flex flex-media gap ">
           <div className="text-center text-black bg-white sketch text-medium padding-small">
@@ -62,9 +87,9 @@ const Results = ({ ResetRound, rounds }) => {
                 </tr>
               </thead>
               <tbody>
-                {players.map((player) => {
+                {players.map((player, idx) => {
                   return (
-                    <tr>
+                    <tr key={idx}>
                       <td>{player.displayName}</td>
                       <td>{player.score}</td>
                     </tr>
@@ -73,14 +98,14 @@ const Results = ({ ResetRound, rounds }) => {
               </tbody>
             </table>
             <div className="score-overflow score-div">
-              {voteChoices.map((voteChoice) => {
+              {voteChoices.map((voteChoice, idx) => {
                 return voteChoice.isCorrect ? (
-                  <p>
+                  <p key={idx}>
                     for {voteChoice.sketcher} you voted {voteChoice.voted} +1
                     point{" "}
                   </p>
                 ) : (
-                  <p>
+                  <p key={idx}>
                     for {voteChoice.sketcher} you voted {voteChoice.voted} -1
                     point{" "}
                   </p>
