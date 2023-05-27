@@ -25,7 +25,7 @@ const Lobby = () => {
   } = useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting, isResults } =
     useContext(GameContext);
-  console.log(players);
+
   function ClickHandler() {
     RandCard();
     StartGame();
