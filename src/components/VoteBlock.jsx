@@ -6,6 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { Skeleton } from "@mui/material";
 
 const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
   const [voteChoice, setVoteChoice] = useState(card[0]);
@@ -17,7 +18,10 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
 
   return (
     <div className="tracking-in-expand">
-      <Card variant="outlined" sx={{ sketchPadSize }}>
+      <Card
+        variant="outlined"
+        sx={{ width: sketchPadSize, height: sketchPadSize }}
+      >
         {activePlayer.displayName !== userSketch.displayName && (
           <div className="text-center">
             <CardActions>
@@ -59,6 +63,7 @@ const VoteBlock = ({ activePlayer, userSketch, card, SendVote }) => {
             </CardActions>
           </div>
         )}
+
         <CardMedia
           component="img"
           image={userSketch.sketch}

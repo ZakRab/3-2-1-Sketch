@@ -16,7 +16,7 @@ const Sketch = ({ SendSketch }) => {
   const { RandTopic, card, setIsSketching, setIsVoting, setUserSketches } =
     useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
-  const [countDown, setCountDown] = useState(45);
+  const [countDown, setCountDown] = useState(2);
   const viewWidthw = window.screen.width;
   let canvas = React.createRef();
   const [color, setColor] = useState("black");
@@ -195,7 +195,7 @@ const Sketch = ({ SendSketch }) => {
             width={sketchPadSizing()}
             height={sketchPadSizing()}
             strokeWidth={3}
-            backgroundImage={require("../components/images/Screenshot 2023-05-27 at 01.38.04.png")}
+            backgroundImage={require("../components/images/paper-background.webp")}
             exportWithBackgroundImage={true}
             strokeColor={color}
           />
