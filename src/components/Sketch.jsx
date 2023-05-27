@@ -184,7 +184,9 @@ const Sketch = ({ SendSketch }) => {
         </div>
         <ButtonBase
           onMouseDown={() => sound.play()}
+          onTouchStart={() => sound.play()}
           onMouseUp={() => sound.pause()}
+          onTouchEnd={() => sound.pause()}
           className="canvas"
           disableRipple
         >
