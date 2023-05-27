@@ -16,7 +16,7 @@ const Sketch = ({ SendSketch }) => {
   const { RandTopic, card, setIsSketching, setIsVoting, setUserSketches } =
     useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
-  const [countDown, setCountDown] = useState(2);
+  const [countDown, setCountDown] = useState(45);
   const viewWidthw = window.screen.width;
   let canvas = React.createRef();
   const [color, setColor] = useState("black");
