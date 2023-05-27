@@ -104,7 +104,13 @@ const Results = ({ ResetRound, rounds }) => {
                   <Carousel.Item key={idx}>
                     <ResultBlock key={idx} userSketch={userSketch} />
                     <Carousel.Caption>
-                      <h1>
+                      <h1
+                        style={{
+                          background: "#401e9e",
+                          color: "white",
+                          borderRadius: "5px",
+                        }}
+                      >
                         -
                         {userSketch.displayName +
                           " drew " +

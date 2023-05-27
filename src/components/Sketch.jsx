@@ -195,7 +195,7 @@ const Sketch = ({ SendSketch }) => {
             width={sketchPadSizing()}
             height={sketchPadSizing()}
             strokeWidth={3}
-            backgroundImage={require("../components/images/Screenshot 2023-05-27 at 01.38.04.png")}
+            backgroundImage={require("../components/images/paper-background.webp")}
             exportWithBackgroundImage={true}
             strokeColor={color}
           />
