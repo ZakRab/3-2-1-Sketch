@@ -38,7 +38,10 @@ const Results = ({ ResetRound, rounds }) => {
     setLobbyKey(null);
   }
   return (
-    <div className="margin-auto sketch bg-blue padding-large margin-center d-flex flex-row gap width-vw space-evenly">
+    <div
+      className="margin-auto sketch bg-blue padding-large 
+    margin-center d-flex flex-row gap width-vw space-evenly"
+    >
       <div className="text-center">
         <h1 className="text-white text-medium">
           {rounds >= 7 && "Final "} Results
