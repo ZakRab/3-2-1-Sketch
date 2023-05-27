@@ -20,14 +20,11 @@ body{
     background-size: cover;
     background-position: center;
     font-family: 'Amatic SC', cursive;
-
-
-
 }
 
 @media screen and (max-width: 2000px) {
   .width-vw{
-    width: 60vw;
+    width: 70vw;
   }
   .button-size{
     width: 50%;
@@ -37,7 +34,6 @@ body{
     border-right: 2px solid rgb(255, 255, 255);
 }
 .main-flex{
-
   flex-direction: row;
     justify-content: space-evenly;
 }
@@ -52,6 +48,9 @@ body{
 }
 .margin-center{
   margin-top: 20vw;
+}
+.flex-media{
+  flex-direction: row;
 }
 
 }
@@ -84,6 +83,9 @@ body{
   .margin-center{
     margin-top: 0px;
   }
+  .flex-media{
+    flex-direction: column-reverse;
+  }
 }
 
 
@@ -94,7 +96,11 @@ body, #root, html{
 .margin-auto{
     margin:auto;
 }
-
+.footer-filler{
+  height: 75px;
+  position: static;
+  bottom: 0;
+}
 footer{
     width: 100%;
     background-color: rgb(254, 254, 254);
@@ -121,7 +127,20 @@ footer div{
     background-color: #401e9e
   }
  
+  .skeleton {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
 
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 70%);
+    }
+  
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+  }
 
 .height150px{
     height: 150px; 
@@ -175,6 +194,7 @@ justify-content: space-evenly;
   border-top: black solid 3px;
 }
 
+html, body {margin: 0; height: 100%;}
 
 .margin-top-small{
   margin-top: 15px;

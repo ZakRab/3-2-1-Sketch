@@ -19,12 +19,12 @@ io.on("connection", (socket) => {
   isHost = isHost === "true";
   socket.join(lobbyKey);
   io.to(lobbyKey).emit("user connect", { displayName, isHost });
+
   socket.on("update players", (players) => {
     io.to(lobbyKey).emit("update players", players);
   });
 
   socket.on("start-game", (card, rounds) => {
-    console.log(rounds);
     io.to(lobbyKey).emit("start-game", card, rounds);
   });
 
@@ -39,6 +39,9 @@ io.on("connection", (socket) => {
   });
   socket.on("to-results", () => {
     io.to(lobbyKey).emit("to-results");
+  });
+  socket.on("ready-player", () => {
+    io.to(lobbyKey).emit("ready-player");
   });
 
   socket.on("disconnect", () => {

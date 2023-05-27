@@ -14,6 +14,7 @@ const useSocket = (lobbyKey) => {
     setUserVotes,
   } = useContext(GameContext);
   const [rounds, setRounds] = useState(0);
+  const [readies, setReadies] = useState(0);
   const socketRef = useRef;
   useEffect(() => {
     socketRef.current = io("https://three21sketch.onrender.com", {
@@ -91,6 +92,9 @@ const useSocket = (lobbyKey) => {
       setIsVoting(false);
       setResults(true);
     });
+    socketRef.current.on("ready-player", () => {
+      setReadies((curr) => curr + 1);
+    });
   }, [lobbyKey]);
 
   function StartGame() {
@@ -112,6 +116,9 @@ const useSocket = (lobbyKey) => {
   function ToResults() {
     socketRef.current.emit("to-results");
   }
+  function ReadyPlayer() {
+    socketRef.current.emit("ready-player");
+  }
   return {
     players,
     StartGame,
@@ -120,6 +127,9 @@ const useSocket = (lobbyKey) => {
     ResetRound,
     ToResults,
     rounds,
+    ReadyPlayer,
+    readies,
+    setReadies,
   };
 };
 export default useSocket;

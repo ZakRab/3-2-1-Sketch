@@ -1,28 +1,41 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { Topic } from "@mui/icons-material";
+import { Howl } from "howler";
+import {
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  ButtonBase,
+} from "@mui/material";
 
 const Sketch = ({ SendSketch }) => {
   const { displayName } = useContext(LobbyContext);
-  const {
-    RandTopic,
-    card,
-    setIsSketching,
-    setIsVoting,
-    setUserSketches,
-    isSketching,
-  } = useContext(GameContext);
+  const { RandTopic, card, setIsSketching, setIsVoting, setUserSketches } =
+    useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
   const [countDown, setCountDown] = useState(45);
   const viewWidthw = window.screen.width;
   let canvas = React.createRef();
+  const [color, setColor] = useState("black");
+  const sound = useMemo(
+    () =>
+      new Howl({
+        src: [require("../components/audio/pencil-sound.mp3")],
+        html5: true,
+        volume: 1,
+      }),
+    []
+  );
+
   useEffect(() => {
     setUserTopic(card[RandTopic()]);
     setUserSketches([]);
+    sound.pause();
   }, [card]);
+
   useEffect(() => {
     if (countDown > 0) {
       setTimeout(() => {
@@ -52,16 +65,6 @@ const Sketch = ({ SendSketch }) => {
     <>
       <div className="margin-auto sketch width-vw bg-blue d-flex margin-center space-evenly padding-large flex-wrap ">
         <div className="d-flex flex-column space-evenly text-center">
-          {/* <div className="bg-white sketch padding-small text-medium margin-auto">
-            <CountdownCircleTimer
-              isPlaying
-              duration={45}
-              colors={["#05c22e", "#ffea00", "#ff8800", "#dc0303"]}
-              colorsTime={[35, 20, 8, 0]}
-            >
-              {({ remainingTime }) => remainingTime}
-            </CountdownCircleTimer>
-          </div> */}
           <div className="bg-white sketch padding-small margin-auto margin-bottom">
             <span className="text-medium">
               {card.map((topic, idx) =>
@@ -85,16 +88,118 @@ const Sketch = ({ SendSketch }) => {
               ></div>
             </div>
           </div>
+          <div className="margin-auto">
+            <FormControl>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="black"
+                row
+                name="radio-buttons-group"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+              >
+                <FormControlLabel
+                  value="black"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "black",
+                        "&.Mui-checked": {
+                          color: "black",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+                <FormControlLabel
+                  value="red"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "red",
+                        "&.Mui-checked": {
+                          color: "red",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+                <FormControlLabel
+                  value="orange"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "orange",
+                        "&.Mui-checked": {
+                          color: "orange",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+                <FormControlLabel
+                  value="blue"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "blue",
+                        "&.Mui-checked": {
+                          color: "blue",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+                <FormControlLabel
+                  value="green"
+                  control={
+                    <Radio
+                      sx={{
+                        color: "green",
+                        "&.Mui-checked": {
+                          color: "green",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 50,
+                        },
+                      }}
+                    />
+                  }
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
         </div>
-        <div className="">
+        <ButtonBase
+          onMouseDown={() => sound.play()}
+          onTouchStart={() => sound.play()}
+          onMouseUp={() => sound.pause()}
+          onTouchEnd={() => sound.pause()}
+          className="canvas"
+          disableRipple
+        >
           <ReactSketchCanvas
             ref={canvas}
             width={sketchPadSizing()}
             height={sketchPadSizing()}
-            strokeWidth={2}
-            strokeColor="black"
+            strokeWidth={3}
+            backgroundImage={require("../components/images/paper-background.webp")}
+            exportWithBackgroundImage={true}
+            strokeColor={color}
           />
-        </div>
+        </ButtonBase>
       </div>
     </>
   );

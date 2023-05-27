@@ -19,6 +19,9 @@ const Lobby = () => {
     ResetRound,
     ToResults,
     rounds,
+    ReadyPlayer,
+    readies,
+    setReadies,
   } = useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting, isResults } =
     useContext(GameContext);
@@ -30,15 +33,14 @@ const Lobby = () => {
   return (
     <>
       {!isSketching && !isVoting && !isResults && (
-        <div className="main-margin margin-center width-vw text-white bg-blue">
+        <div className="main-margin text-white bg-blue">
           <h1>Lobby {lobbyKey}</h1>
           <hr></hr>
-          <div className="text-medium d-flex flex-row flex-wrap main-flex">
+          <div className="text-medium d-flex flex-column flex-wrap ">
             {players &&
               players.map((player, idx) => {
                 return (
-                  <div className="slide-in-right" key={idx}>
-                    {" "}
+                  <div className="slide-in-right text-center" key={idx}>
                     {player.displayName.toUpperCase()}
                   </div>
                 );
@@ -52,8 +54,17 @@ const Lobby = () => {
         </div>
       )}
       {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
-      {isVoting && <Vote ToResults={ToResults} SendVote={SendVote}></Vote>}
+      {isVoting && (
+        <Vote
+          ToResults={ToResults}
+          ReadyPlayer={ReadyPlayer}
+          SendVote={SendVote}
+          setReadies={setReadies}
+          readies={readies}
+        ></Vote>
+      )}
       {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
+      <div className="footer-filler"></div>
       <footer className="d-flex top-border space-between">
         <h2 className="margin-top-small">-{activePlayer.displayName}-</h2>
         {(isSketching || isResults || isVoting) && (
