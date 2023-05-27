@@ -18,11 +18,13 @@ const Vote = ({ SendVote, ReadyPlayer, ToResults, readies, setReadies }) => {
   }
   return (
     <>
-      <div className=" margin-auto sketch bg-blue margin-auto margin-center width-vw padding-large">
-        <div className="text-white text-center margin-auto">
-          {readies}/{players.length}
-        </div>
-        <div className="width-vw margin-auto">
+      <div
+        className=" margin-auto sketch 
+      bg-blue d-flex flex-column flex-wrap space-evenly
+       margin-auto margin-center gap width-vw padding-large"
+      >
+        <h1 className="text-white text-center">Vote</h1>
+        <div className="margin-auto">
           {visible && (
             <Skeleton
               variant="rounded"
@@ -36,8 +38,6 @@ const Vote = ({ SendVote, ReadyPlayer, ToResults, readies, setReadies }) => {
             interval={null}
             onLoad={() => setVisible(false)}
           >
-            {/* {userSketches && */}
-
             {userSketches.map((userSketch, idx) => {
               return (
                 <Carousel.Item key={idx}>
@@ -48,16 +48,12 @@ const Vote = ({ SendVote, ReadyPlayer, ToResults, readies, setReadies }) => {
                     card={card}
                     SendVote={SendVote}
                   />
-                  <Carousel.Caption>
-                    <h1>-{userSketch.displayName}-</h1>
-                  </Carousel.Caption>
                 </Carousel.Item>
               );
             })}
-            {/* } */}
           </Carousel>
         </div>
-        <div className="text-center join-button">
+        <div className="text-center margin-bottom join-button">
           <Button
             disabled={clicked}
             variant="contained"
@@ -66,7 +62,7 @@ const Vote = ({ SendVote, ReadyPlayer, ToResults, readies, setReadies }) => {
               ReadyPlayer();
             }}
           >
-            Ready
+            Ready {readies}/{players.length}
           </Button>
         </div>
       </div>
