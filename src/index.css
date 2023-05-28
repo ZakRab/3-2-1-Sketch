@@ -7,6 +7,9 @@ width: min-content;
 .score-overflow{
     overflow: scroll;
 }
+.width-lobby{
+  width: 50%
+}
 .score-div{
     height: 70px;
     width: 200;
