@@ -37,11 +37,13 @@ const Results = ({ ResetRound, rounds }) => {
     setDisplayName(null);
     navigate("/main");
     setLobbyKey(null);
+    setIsExploding(false);
   }
   const [isExploding, setIsExploding] = useState(false);
 
   useEffect(() => {
-    if (rounds === 7 && Winner() == activePlayer.displayName) {
+    if (rounds === 7) {
+      // && Winner() == activePlayer.displayName) {
       setIsExploding(true);
     }
   }, [rounds]);
