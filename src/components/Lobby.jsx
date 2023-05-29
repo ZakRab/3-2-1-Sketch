@@ -45,7 +45,6 @@ const Lobby = () => {
   const resultTransition = useTransition(isResults, {
     from: { x: 500, opacity: 0 },
     enter: { x: 0, opacity: 1 },
-    leave: { x: -500, opacity: 0 },
     ref: resultTransRef,
   });
   useChain([sketchTransRef, voteTransRef, resultTransRef]);

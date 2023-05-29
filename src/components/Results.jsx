@@ -42,7 +42,7 @@ const Results = ({ ResetRound, rounds }) => {
   const [isExploding, setIsExploding] = useState(false);
 
   useEffect(() => {
-    if (rounds === 7) {
+    if (rounds >= 7) {
       setIsExploding(true);
     }
   }, [rounds]);
@@ -79,7 +79,18 @@ const Results = ({ ResetRound, rounds }) => {
                 New Game?
               </Button>
             )}
-
+            {activePlayer.isHost && rounds < 7 && (
+              <div className="margin-top-small">
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    ResetRound();
+                  }}
+                >
+                  Start Next Round
+                </Button>
+              </div>
+            )}
             <table className="margin-auto">
               <thead>
                 <tr>
@@ -113,18 +124,6 @@ const Results = ({ ResetRound, rounds }) => {
                 );
               })}
             </div>
-            {activePlayer.isHost && rounds < 7 && (
-              <div className="margin-top-small">
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    ResetRound();
-                  }}
-                >
-                  Start Next Round
-                </Button>
-              </div>
-            )}
           </div>
           <div className="">
             <Carousel variant="dark" interval={null}>

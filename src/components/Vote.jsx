@@ -23,7 +23,7 @@ const Vote = ({ SendVote, ReadyPlayer, ToResults, readies, setReadies }) => {
       bg-blue d-flex flex-column flex-wrap space-evenly
        margin-auto margin-center gap width-vw padding-large"
       >
-        <h1 className="text-white text-center">Vote</h1>
+        <h1 className="text-white text-medium text-center">Vote</h1>
         <div className="margin-auto">
           {visible && (
             <Skeleton
