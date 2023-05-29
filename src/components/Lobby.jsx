@@ -7,7 +7,7 @@ import Sketch from "./Sketch";
 import Vote from "./Vote";
 import Results from "./Results";
 import Button from "@mui/material/Button";
-import { useTransition, animated } from "react-spring";
+import { useTransition, animated, useChain, useSpringRef } from "react-spring";
 
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
@@ -26,21 +26,29 @@ const Lobby = () => {
   } = useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting, isResults } =
     useContext(GameContext);
+  const sketchTransRef = useSpringRef();
+  const voteTransRef = useSpringRef();
+  const resultTransRef = useSpringRef();
   const sketchTransition = useTransition(isSketching, {
-    from: { y: 500, opacity: 0 },
-    enter: { y: 0, opacity: 1 },
-    leave: { y: -500, opacity: 0 },
+    from: { x: 500, opacity: 0 },
+    enter: { x: 0, opacity: 1 },
+    leave: { x: -500, opacity: 0 },
+    ref: sketchTransRef,
   });
+
   const voteTransition = useTransition(isVoting, {
-    from: { y: 500, opacity: 0 },
-    enter: { y: 0, opacity: 1 },
-    leave: { y: -500, opacity: 0 },
+    from: { x: 500, opacity: 0 },
+    enter: { x: 0, opacity: 1 },
+    leave: { x: -500, opacity: 0 },
+    ref: voteTransRef,
   });
   const resultTransition = useTransition(isResults, {
-    from: { y: 500, opacity: 0 },
-    enter: { y: 0, opacity: 1 },
-    leave: { y: -500, opacity: 0 },
+    from: { x: 500, opacity: 0 },
+    enter: { x: 0, opacity: 1 },
+    leave: { x: -500, opacity: 0 },
+    ref: resultTransRef,
   });
+  useChain([sketchTransRef, voteTransRef, resultTransRef]);
   function ClickHandler() {
     RandCard();
     StartGame();

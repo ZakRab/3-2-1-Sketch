@@ -140,11 +140,9 @@ const Results = ({ ResetRound, rounds }) => {
                           borderRadius: "5px",
                         }}
                       >
-                        -
                         {userSketch.displayName +
                           " drew " +
                           userSketch.userTopic}
-                        -
                       </h1>
                     </Carousel.Caption>
                   </Carousel.Item>
