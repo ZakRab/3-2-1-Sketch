@@ -43,7 +43,6 @@ const Results = ({ ResetRound, rounds }) => {
 
   useEffect(() => {
     if (rounds === 7) {
-      // && Winner() == activePlayer.displayName) {
       setIsExploding(true);
     }
   }, [rounds]);
