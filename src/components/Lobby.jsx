@@ -7,6 +7,7 @@ import Sketch from "./Sketch";
 import Vote from "./Vote";
 import Results from "./Results";
 import Button from "@mui/material/Button";
+import { useTransition, animated } from "react-spring";
 
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
@@ -25,7 +26,21 @@ const Lobby = () => {
   } = useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting, isResults } =
     useContext(GameContext);
-
+  const sketchTransition = useTransition(isSketching, {
+    from: { y: 500, opacity: 0 },
+    enter: { y: 0, opacity: 1 },
+    leave: { y: -500, opacity: 0 },
+  });
+  const voteTransition = useTransition(isVoting, {
+    from: { y: 500, opacity: 0 },
+    enter: { y: 0, opacity: 1 },
+    leave: { y: -500, opacity: 0 },
+  });
+  const resultTransition = useTransition(isResults, {
+    from: { y: 500, opacity: 0 },
+    enter: { y: 0, opacity: 1 },
+    leave: { y: -500, opacity: 0 },
+  });
   function ClickHandler() {
     RandCard();
     StartGame();
@@ -53,17 +68,38 @@ const Lobby = () => {
           )}
         </div>
       )}
-      {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
-      {isVoting && (
-        <Vote
-          ToResults={ToResults}
-          ReadyPlayer={ReadyPlayer}
-          SendVote={SendVote}
-          setReadies={setReadies}
-          readies={readies}
-        ></Vote>
+      {/* {isSketching && <Sketch SendSketch={SendSketch}></Sketch>} */}
+      {sketchTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <Sketch SendSketch={SendSketch}></Sketch>
+            </animated.div>
+          )
       )}
-      {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
+      {voteTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <Vote
+                ToResults={ToResults}
+                ReadyPlayer={ReadyPlayer}
+                SendVote={SendVote}
+                setReadies={setReadies}
+                readies={readies}
+              ></Vote>
+            </animated.div>
+          )
+      )}
+      {resultTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <Results ResetRound={ResetRound} rounds={rounds}></Results>
+            </animated.div>
+          )
+      )}
+      {/* {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>} */}
       <div className="footer-filler"></div>
       <footer className="d-flex top-border space-between">
         <h2 className="margin-top-small">-{activePlayer.displayName}-</h2>
