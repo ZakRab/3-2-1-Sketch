@@ -10,13 +10,15 @@ import {
   FormControl,
   ButtonBase,
 } from "@mui/material";
+import { useTransition, animated, useChain, useSpringRef } from "react-spring";
 
 const Sketch = ({ SendSketch }) => {
   const { displayName } = useContext(LobbyContext);
   const { RandTopic, card, setIsSketching, setIsVoting, setUserSketches } =
     useContext(GameContext);
   const [userTopic, setUserTopic] = useState([]);
-  const [countDown, setCountDown] = useState(5);
+  const [countDown, setCountDown] = useState(1);
+  const [cardCountDown, setCardCountDown] = useState(3);
   const viewWidthw = window.screen.width;
   let canvas = React.createRef();
   const [color, setColor] = useState("black");
@@ -51,17 +53,26 @@ const Sketch = ({ SendSketch }) => {
   );
 
   useEffect(() => {
-    setUserTopic(card[RandTopic()]);
     setUserSketches([]);
-    pencilSound.pause();
-  }, [card]);
+    const topicPicker = setInterval(() => {
+      setUserTopic(card[RandTopic()]);
+    }, 150);
+    setTimeout(() => {
+      clearInterval(topicPicker);
+      console.log("end rand");
+    }, 3000);
+  }, []);
 
   useEffect(() => {
-    if (countDown > 0) {
+    setTimeout(() => {
+      setCardCountDown((curr) => curr - 1);
+    }, 1000);
+    if (cardCountDown <= 0) {
       setTimeout(() => {
         setCountDown((curr) => curr - 1);
       }, 1000);
-    } else {
+    }
+    if (cardCountDown <= 0 && countDown <= 0) {
       canvas.current
         .exportImage("png")
         .then((data) => {
@@ -80,8 +91,29 @@ const Sketch = ({ SendSketch }) => {
     if (countDown === 8) {
       tickingSound.pause();
     }
-  }, [countDown]);
+  }, [countDown, cardCountDown]);
 
+  const barTransition = useTransition(cardCountDown <= 0, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    config: {
+      duration: 3000,
+    },
+  });
+  const colorPalletteTransition = useTransition(cardCountDown <= 0, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    config: {
+      duration: 1500,
+    },
+  });
+  const padTransition = useTransition(cardCountDown <= 0, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    config: {
+      duration: 1000,
+    },
+  });
   function sketchPadSizing() {
     if (viewWidthw > 922) {
       return viewWidthw * 0.3;
@@ -96,7 +128,7 @@ const Sketch = ({ SendSketch }) => {
             <span className="text-medium">
               {card.map((topic, idx) =>
                 topic == userTopic ? (
-                  <span style={{ color: "blue" }} key={idx}>
+                  <span style={{ color: "red" }} key={idx}>
                     {topic}
                   </span>
                 ) : (
@@ -104,129 +136,247 @@ const Sketch = ({ SendSketch }) => {
                 )
               )}
             </span>
-            <div className="progressbar ">
-              <div
-                style={{
-                  height: "100%",
-                  width: `${(countDown / 45) * 100}%`,
-                  backgroundColor: "#401e9e",
-                  transition: "width 1s",
-                }}
-              ></div>
-            </div>
+            {barTransition(
+              (style, item) =>
+                item && (
+                  <animated.div style={style} className="progressbar ">
+                    <div
+                      style={{
+                        height: "100%",
+                        width: `${(countDown / 45) * 100}%`,
+                        backgroundColor: "#401e9e",
+                        transition: "width 1s",
+                      }}
+                    ></div>
+                  </animated.div>
+                )
+            )}
           </div>
-          <div className="margin-auto">
-            <FormControl>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="black"
-                row
-                name="radio-buttons-group"
-                value={color}
-                onChange={(e) => (setColor(e.target.value), popSound.play())}
-              >
-                <FormControlLabel
-                  value="black"
-                  control={
-                    <Radio
-                      sx={{
-                        color: "black",
-                        "&.Mui-checked": {
+
+          {padTransition(
+            (style, item) =>
+              item && (
+                <animated.div style={style} className="margin-auto">
+                  <FormControl>
+                    <RadioGroup
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      defaultValue="black"
+                      row
+                      name="radio-buttons-group"
+                      value={color}
+                      onChange={(e) => (
+                        setColor(e.target.value), popSound.play()
+                      )}
+                    >
+                      <FormControlLabel
+                        value="black"
+                        control={
+                          <Radio
+                            sx={{
+                              color: "black",
+                              "&.Mui-checked": {
+                                color: "black",
+                              },
+                              "& .MuiSvgIcon-root": {
+                                fontSize: 50,
+                              },
+                            }}
+                          />
+                        }
+                      />
+                      <FormControlLabel
+                        value="red"
+                        control={
+                          <Radio
+                            sx={{
+                              color: "red",
+                              "&.Mui-checked": {
+                                color: "red",
+                              },
+                              "& .MuiSvgIcon-root": {
+                                fontSize: 50,
+                              },
+                            }}
+                          />
+                        }
+                      />
+                      <FormControlLabel
+                        value="orange"
+                        control={
+                          <Radio
+                            sx={{
+                              color: "orange",
+                              "&.Mui-checked": {
+                                color: "orange",
+                              },
+                              "& .MuiSvgIcon-root": {
+                                fontSize: 50,
+                              },
+                            }}
+                          />
+                        }
+                      />
+
+                      <FormControlLabel
+                        value="green"
+                        control={
+                          <Radio
+                            sx={{
+                              color: "green",
+                              "&.Mui-checked": {
+                                color: "green",
+                              },
+                              "& .MuiSvgIcon-root": {
+                                fontSize: 50,
+                              },
+                            }}
+                          />
+                        }
+                      />
+                      <FormControlLabel
+                        value="blue"
+                        control={
+                          <Radio
+                            sx={{
+                              color: "blue",
+                              "&.Mui-checked": {
+                                color: "blue",
+                              },
+                              "& .MuiSvgIcon-root": {
+                                fontSize: 50,
+                              },
+                            }}
+                          />
+                        }
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </animated.div>
+              )
+          )}
+
+          {/* {cardCountDown < 0 && (
+            <animated.div style={style} className="margin-auto">
+              <FormControl>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="black"
+                  row
+                  name="radio-buttons-group"
+                  value={color}
+                  onChange={(e) => (setColor(e.target.value), popSound.play())}
+                >
+                  <FormControlLabel
+                    value="black"
+                    control={
+                      <Radio
+                        sx={{
                           color: "black",
-                        },
-                        "& .MuiSvgIcon-root": {
-                          fontSize: 50,
-                        },
-                      }}
-                    />
-                  }
-                />
-                <FormControlLabel
-                  value="red"
-                  control={
-                    <Radio
-                      sx={{
-                        color: "red",
-                        "&.Mui-checked": {
+                          "&.Mui-checked": {
+                            color: "black",
+                          },
+                          "& .MuiSvgIcon-root": {
+                            fontSize: 50,
+                          },
+                        }}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    value="red"
+                    control={
+                      <Radio
+                        sx={{
                           color: "red",
-                        },
-                        "& .MuiSvgIcon-root": {
-                          fontSize: 50,
-                        },
-                      }}
-                    />
-                  }
-                />
-                <FormControlLabel
-                  value="orange"
-                  control={
-                    <Radio
-                      sx={{
-                        color: "orange",
-                        "&.Mui-checked": {
+                          "&.Mui-checked": {
+                            color: "red",
+                          },
+                          "& .MuiSvgIcon-root": {
+                            fontSize: 50,
+                          },
+                        }}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    value="orange"
+                    control={
+                      <Radio
+                        sx={{
                           color: "orange",
-                        },
-                        "& .MuiSvgIcon-root": {
-                          fontSize: 50,
-                        },
-                      }}
-                    />
-                  }
-                />
-                <FormControlLabel
-                  value="blue"
-                  control={
-                    <Radio
-                      sx={{
-                        color: "blue",
-                        "&.Mui-checked": {
-                          color: "blue",
-                        },
-                        "& .MuiSvgIcon-root": {
-                          fontSize: 50,
-                        },
-                      }}
-                    />
-                  }
-                />
-                <FormControlLabel
-                  value="green"
-                  control={
-                    <Radio
-                      sx={{
-                        color: "green",
-                        "&.Mui-checked": {
+                          "&.Mui-checked": {
+                            color: "orange",
+                          },
+                          "& .MuiSvgIcon-root": {
+                            fontSize: 50,
+                          },
+                        }}
+                      />
+                    }
+                  />
+
+                  <FormControlLabel
+                    value="green"
+                    control={
+                      <Radio
+                        sx={{
                           color: "green",
-                        },
-                        "& .MuiSvgIcon-root": {
-                          fontSize: 50,
-                        },
-                      }}
+                          "&.Mui-checked": {
+                            color: "green",
+                          },
+                          "& .MuiSvgIcon-root": {
+                            fontSize: 50,
+                          },
+                        }}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    value="blue"
+                    control={
+                      <Radio
+                        sx={{
+                          color: "blue",
+                          "&.Mui-checked": {
+                            color: "blue",
+                          },
+                          "& .MuiSvgIcon-root": {
+                            fontSize: 50,
+                          },
+                        }}
+                      />
+                    }
+                  />
+                </RadioGroup>
+              </FormControl>
+            </animated.div>
+          )} */}
+          {padTransition(
+            (style, item) =>
+              item && (
+                <animated.div style={style}>
+                  <ButtonBase
+                    onMouseDown={() => pencilSound.play()}
+                    onTouchStart={() => pencilSound.play()}
+                    onMouseUp={() => pencilSound.pause()}
+                    onTouchEnd={() => pencilSound.pause()}
+                    className="canvas"
+                    disableRipple
+                  >
+                    <ReactSketchCanvas
+                      ref={canvas}
+                      width={sketchPadSizing()}
+                      height={sketchPadSizing()}
+                      strokeWidth={3}
+                      backgroundImage={require("../components/images/paper-background.webp")}
+                      exportWithBackgroundImage={true}
+                      strokeColor={color}
                     />
-                  }
-                />
-              </RadioGroup>
-            </FormControl>
-          </div>
+                  </ButtonBase>
+                </animated.div>
+              )
+          )}
         </div>
-        <ButtonBase
-          onMouseDown={() => pencilSound.play()}
-          onTouchStart={() => pencilSound.play()}
-          onMouseUp={() => pencilSound.pause()}
-          onTouchEnd={() => pencilSound.pause()}
-          className="canvas"
-          disableRipple
-        >
-          <ReactSketchCanvas
-            ref={canvas}
-            width={sketchPadSizing()}
-            height={sketchPadSizing()}
-            strokeWidth={3}
-            backgroundImage={require("../components/images/paper-background.webp")}
-            exportWithBackgroundImage={true}
-            strokeColor={color}
-          />
-        </ButtonBase>
       </div>
     </>
   );

@@ -49,7 +49,7 @@ const Lobby = () => {
   });
   useChain([sketchTransRef, voteTransRef, resultTransRef]);
   function ClickHandler() {
-    RandCard();
+    // RandCard();
     StartGame();
   }
   return (
@@ -75,7 +75,6 @@ const Lobby = () => {
           )}
         </div>
       )}
-      {/* {isSketching && <Sketch SendSketch={SendSketch}></Sketch>} */}
       {sketchTransition(
         (style, item) =>
           item && (
