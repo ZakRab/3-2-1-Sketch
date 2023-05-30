@@ -109,7 +109,7 @@ const Lobby = () => {
             </animated.div>
           )
       )}
-      <GameFooter></GameFooter>
+      <GameFooter rounds={rounds} players={players}></GameFooter>
     </>
   );
 };

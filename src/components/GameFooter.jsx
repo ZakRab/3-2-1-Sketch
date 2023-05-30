@@ -1,15 +1,10 @@
 import React, { useContext } from "react";
 import { LobbyContext } from "../context/LobbyContext";
 import { GameContext } from "../context/GameContext";
-import useSocket from "../hooks/useSocket";
-import { useParams } from "react-router-dom";
 
-export default function GameFooter() {
+export default function GameFooter({ rounds, players }) {
   const { isSketching, isVoting, isResults } = useContext(GameContext);
   const { activePlayer } = useContext(LobbyContext);
-
-  const { players, rounds } = useSocket(lobbyKey);
-  const { lobbyKey } = useParams();
 
   return (
     <>
