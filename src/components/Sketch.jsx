@@ -3,14 +3,9 @@ import { ReactSketchCanvas } from "react-sketch-canvas";
 import { GameContext } from "../context/GameContext";
 import { LobbyContext } from "../context/LobbyContext";
 import { Howl } from "howler";
-import {
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  ButtonBase,
-} from "@mui/material";
+import { ButtonBase } from "@mui/material";
 import { useTransition, animated } from "react-spring";
+import ColorRadios from "../components/ColorRadios";
 
 const Sketch = ({ SendSketch }) => {
   const { displayName } = useContext(LobbyContext);
@@ -28,16 +23,6 @@ const Sketch = ({ SendSketch }) => {
         src: [require("../components/audio/pencil-sound.mp3")],
         html5: true,
         volume: 1,
-      }),
-    []
-  );
-  const popSound = useMemo(
-    () =>
-      new Howl({
-        src: [require("../components/audio/pop-sound.mp3")],
-        html5: true,
-        volume: 1,
-        rate: 5,
       }),
     []
   );
@@ -86,7 +71,6 @@ const Sketch = ({ SendSketch }) => {
     }
     if (countDown === 10) {
       tickingSound.play();
-      console.log("10 seconds left");
     }
     if (countDown === 8) {
       tickingSound.pause();
@@ -157,100 +141,7 @@ const Sketch = ({ SendSketch }) => {
             (style, item) =>
               item && (
                 <animated.div style={style} className="margin-auto">
-                  <FormControl>
-                    <RadioGroup
-                      aria-labelledby="demo-radio-buttons-group-label"
-                      defaultValue="black"
-                      row
-                      name="radio-buttons-group"
-                      value={color}
-                      onChange={(e) => (
-                        setColor(e.target.value), popSound.play()
-                      )}
-                    >
-                      <FormControlLabel
-                        value="black"
-                        control={
-                          <Radio
-                            sx={{
-                              color: "black",
-                              "&.Mui-checked": {
-                                color: "black",
-                              },
-                              "& .MuiSvgIcon-root": {
-                                fontSize: 50,
-                              },
-                            }}
-                          />
-                        }
-                      />
-                      <FormControlLabel
-                        value="red"
-                        control={
-                          <Radio
-                            sx={{
-                              color: "red",
-                              "&.Mui-checked": {
-                                color: "red",
-                              },
-                              "& .MuiSvgIcon-root": {
-                                fontSize: 50,
-                              },
-                            }}
-                          />
-                        }
-                      />
-                      <FormControlLabel
-                        value="orange"
-                        control={
-                          <Radio
-                            sx={{
-                              color: "orange",
-                              "&.Mui-checked": {
-                                color: "orange",
-                              },
-                              "& .MuiSvgIcon-root": {
-                                fontSize: 50,
-                              },
-                            }}
-                          />
-                        }
-                      />
-
-                      <FormControlLabel
-                        value="green"
-                        control={
-                          <Radio
-                            sx={{
-                              color: "green",
-                              "&.Mui-checked": {
-                                color: "green",
-                              },
-                              "& .MuiSvgIcon-root": {
-                                fontSize: 50,
-                              },
-                            }}
-                          />
-                        }
-                      />
-                      <FormControlLabel
-                        value="blue"
-                        control={
-                          <Radio
-                            sx={{
-                              color: "blue",
-                              "&.Mui-checked": {
-                                color: "blue",
-                              },
-                              "& .MuiSvgIcon-root": {
-                                fontSize: 50,
-                              },
-                            }}
-                          />
-                        }
-                      />
-                    </RadioGroup>
-                  </FormControl>
+                  <ColorRadios color={color} setColor={setColor}></ColorRadios>
                 </animated.div>
               )
           )}
