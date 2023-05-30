@@ -8,7 +8,7 @@ import Vote from "./Vote";
 import Results from "./Results";
 import Button from "@mui/material/Button";
 import { useTransition, animated, useChain, useSpringRef } from "react-spring";
-
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
@@ -69,7 +69,12 @@ const Lobby = () => {
               })}
           </div>
           {activePlayer.isHost && (
-            <Button variant="contained" onClick={() => ClickHandler()}>
+            <Button
+              startIcon={<PlayArrowIcon></PlayArrowIcon>}
+              variant="contained"
+              disabled={players.length < 2}
+              onClick={() => ClickHandler()}
+            >
               start game
             </Button>
           )}
