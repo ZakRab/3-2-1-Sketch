@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import useSocket from "../hooks/useSocket";
 import { LobbyContext } from "../context/LobbyContext";
@@ -48,13 +48,18 @@ const Lobby = () => {
     ref: resultTransRef,
   });
   useChain([sketchTransRef, voteTransRef, resultTransRef]);
+  const [snackBar, setSnackBar] = useState(false);
   function ClickHandler() {
-    StartGame();
+    if (players.length > 1) {
+      StartGame();
+    } else {
+      setSnackBar((curr) => !curr);
+    }
   }
   return (
     <>
       {!isSketching && !isVoting && !isResults && (
-        <div className="main-margin d-flex width-lobby flex-column text-white bg-blue">
+        <div className="main-margin d-flex width-lobby flex-column text-white bg-blue margin-top">
           <h1 className="text-medium">Lobby {lobbyKey}</h1>
           <hr></hr>
           <div className="text-medium d-flex flex-column flex-wrap ">
@@ -76,6 +81,9 @@ const Lobby = () => {
             >
               start game
             </Button>
+          )}
+          {!activePlayer.isHost && (
+            <h2 className="text-medium">Waiting for host...</h2>
           )}
         </div>
       )}
