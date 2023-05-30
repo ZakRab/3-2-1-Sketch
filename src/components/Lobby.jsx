@@ -24,8 +24,7 @@ const Lobby = () => {
     readies,
     setReadies,
   } = useSocket(lobbyKey);
-  const { RandCard, isSketching, isVoting, isResults } =
-    useContext(GameContext);
+  const { isSketching, isVoting, isResults } = useContext(GameContext);
   const sketchTransRef = useSpringRef();
   const voteTransRef = useSpringRef();
   const resultTransRef = useSpringRef();
@@ -109,7 +108,6 @@ const Lobby = () => {
             </animated.div>
           )
       )}
-      {/* {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>} */}
       <div className="footer-filler"></div>
       <footer className="d-flex top-border space-between">
         <h2 className="margin-top-small">-{activePlayer.displayName}-</h2>

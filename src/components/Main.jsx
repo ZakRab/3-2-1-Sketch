@@ -11,7 +11,6 @@ const Main = () => {
   const {
     lobbyKey,
     setLobbyKey,
-    activePlayer,
     setActivePlayer,
     displayName,
     setDisplayName,

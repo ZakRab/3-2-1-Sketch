@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { LobbyContext } from "../context/LobbyContext";
+import React, { useState } from "react";
 import Select from "@mui/material/Select";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";

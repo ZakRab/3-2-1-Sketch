@@ -1,4 +1,4 @@
-import React, { useState, useSyncExternalStore } from "react";
+import React, { useState } from "react";
 
 export const GameContext = React.createContext(null);
 export function GameProvider(props) {
@@ -83,8 +83,7 @@ export function GameProvider(props) {
     ["Pen ", "Pencil ", "Marker "],
     ["Dog ", "Cat ", "Rabbit "],
     ["Shirt ", "Blouse ", "T-shirt "],
-    ["Car ", " ", "Motorcycle "],
-    ["Book ", "Novel ", "Magazine "],
+    ["Newspaper ", "Novel ", "Magazine "],
     ["Table ", "Desk ", "Counter "],
     ["Guitar ", "Bass ", "Ukulele "],
     ["Mountain ", "Hill ", "Valley "],
@@ -108,7 +107,7 @@ export function GameProvider(props) {
     ["Stallion ", "Foal ", "Colt "],
     ["Latte ", "Espresso ", "Cappuccino "],
     ["Thesaurus ", "Dictionary ", "Encyclopedia "],
-    ["Bed ", "Mattress ", "Pillow "],
+    ["blanket ", "Mattress ", "Pillow "],
     ["Volley Ball ", "Soccer ball ", "Basketball "],
     ["Clock ", "Watch ", "Timer "],
     ["Mutt ", "Puppy ", "Hound "],
