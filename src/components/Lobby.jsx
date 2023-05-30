@@ -59,7 +59,7 @@ const Lobby = () => {
   return (
     <>
       {!isSketching && !isVoting && !isResults && (
-        <div className="main-margin d-flex width-lobby flex-column text-white bg-blue margin-top">
+        <div className="main-margin d-flex width-lobby flex-column text-white bg-blue">
           <h1 className="text-medium">Lobby {lobbyKey}</h1>
           <hr></hr>
           <div className="text-medium d-flex flex-column flex-wrap ">

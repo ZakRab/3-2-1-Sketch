@@ -54,9 +54,7 @@ body{
 .margin-center{
   margin-top: 20vw;
 }
-.margin-top{
-  margin-top: 5% !important;
-}
+
 .flex-media{
   flex-direction: row;
 }
