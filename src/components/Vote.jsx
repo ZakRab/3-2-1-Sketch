@@ -13,7 +13,7 @@ const Vote = ({ SendVote, ReadyPlayer, ToResults, readies, setReadies }) => {
   const [visible, setVisible] = useState(true);
   const viewWidthw = window.screen.width;
   const sketchPadSize = viewWidthw > 900 ? viewWidthw * 0.5 : viewWidthw * 0.92;
-  if (readies == players.length) {
+  if (readies === players.length) {
     setReadies(0);
     ToResults();
   }

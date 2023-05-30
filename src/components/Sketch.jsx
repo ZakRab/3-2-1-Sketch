@@ -111,7 +111,7 @@ const Sketch = ({ SendSketch }) => {
           <div className="bg-white sketch padding-small margin-auto margin-bottom">
             <span className="text-medium">
               {card.map((topic, idx) =>
-                topic == userTopic ? (
+                topic === userTopic ? (
                   <span style={{ color: "red" }} key={idx}>
                     {topic}
                   </span>

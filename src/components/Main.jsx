@@ -18,7 +18,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   function lobbyJoiner() {
-    if (lobbyKey.length == 4) {
+    if (lobbyKey.length === 4) {
       setIsJoining(true);
       setIsInLobby(true);
     } else {
