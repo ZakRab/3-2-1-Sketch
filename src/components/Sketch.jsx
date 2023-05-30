@@ -10,7 +10,7 @@ import {
   FormControl,
   ButtonBase,
 } from "@mui/material";
-import { useTransition, animated, useChain, useSpringRef } from "react-spring";
+import { useTransition, animated } from "react-spring";
 
 const Sketch = ({ SendSketch }) => {
   const { displayName } = useContext(LobbyContext);

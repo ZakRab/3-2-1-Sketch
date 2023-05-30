@@ -186,7 +186,7 @@ margin-top: 10px;
 .gap{
   gap: 3vw;
 }
-Button:not(#join){
+Button:not(.canvas){
   animation: heartbeat 1.5s ease-in-out 20s infinite both;
 
 }
