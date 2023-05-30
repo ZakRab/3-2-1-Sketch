@@ -17,6 +17,10 @@ export default function ColorRadios({ color, setColor }) {
       }),
     []
   );
+  function RadioHandler(e) {
+    setColor(e.target.value);
+    popSound.play();
+  }
   return (
     <FormControl>
       <RadioGroup
@@ -25,7 +29,7 @@ export default function ColorRadios({ color, setColor }) {
         row
         name="radio-buttons-group"
         value={color}
-        onChange={(e) => (setColor(e.target.value), popSound.play())}
+        onChange={(e) => RadioHandler(e)}
       >
         <FormControlLabel
           value="black"
