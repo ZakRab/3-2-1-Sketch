@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Carousel from "react-bootstrap/Carousel";
 import VoteBlock from "./VoteBlock";
 import { Skeleton } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
 const Vote = ({ SendVote, ReadyPlayer, ToResults, readies, setReadies }) => {
   const { activePlayer, players } = useContext(LobbyContext);
   const { userSketches, card } = useContext(GameContext);
@@ -61,6 +62,7 @@ const Vote = ({ SendVote, ReadyPlayer, ToResults, readies, setReadies }) => {
               setClicked(true);
               ReadyPlayer();
             }}
+            startIcon={<CheckIcon />}
           >
             Ready {readies}/{players.length}
           </Button>
