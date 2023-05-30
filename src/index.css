@@ -21,8 +21,10 @@ body{
     background-image: url(../public/images/doodles.jpeg);
     background-repeat: repeat-x;
     background-size: cover;
-    background-position: center;
+    background-position: 0 0;
+    backdrop-filter: blur(4px);
     font-family: 'Amatic SC', cursive;
+    animation: animatedBackground 1000s linear infinite
 }
 
 @media screen and (max-width: 2000px) {
@@ -267,5 +269,13 @@ html, body {margin: 0; height: 100%;}
   45% {
     transform: scale(1);
     animation-timing-function: ease-out;
+  }
+}
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 0;
   }
 }
