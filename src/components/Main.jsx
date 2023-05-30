@@ -5,7 +5,7 @@ import randomString from "random-string";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Swal from "sweetalert2";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+
 const Main = () => {
   const {
     lobbyKey,
@@ -79,8 +79,7 @@ const Main = () => {
               </div>
             )}
             {(isInLobby || isHosting) && (
-              <div className="text-focus-in">
-                <AccountCircle sx={{ color: "action.active", mr: 1, my: 2 }} />
+              <div className="text-focus-in ">
                 <TextField
                   id="displayName"
                   type="text"
@@ -91,14 +90,14 @@ const Main = () => {
               </div>
             )}
             {!isInLobby && (
-              <div className="text-center center join-button">
+              <div id="join" className="text-center center join-button">
                 <Button variant="contained" onClick={() => lobbyJoiner()}>
-                  {"Join".toLowerCase()}
+                  Join lobby
                 </Button>
               </div>
             )}
             {(isInLobby || isHosting) && (
-              <div className="text-focus-in join-button">
+              <div className="text-focus-in join-button ">
                 <Button variant="contained" onClick={() => lobbyEnter()}>
                   Enter Lobby
                 </Button>
