@@ -7,7 +7,8 @@ import Sketch from "./Sketch";
 import Vote from "./Vote";
 import Results from "./Results";
 import Button from "@mui/material/Button";
-
+import { useTransition, animated, useChain, useSpringRef } from "react-spring";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 const Lobby = () => {
   const { activePlayer } = useContext(LobbyContext);
   const { lobbyKey } = useParams();
@@ -25,9 +26,29 @@ const Lobby = () => {
   } = useSocket(lobbyKey);
   const { RandCard, isSketching, isVoting, isResults } =
     useContext(GameContext);
+  const sketchTransRef = useSpringRef();
+  const voteTransRef = useSpringRef();
+  const resultTransRef = useSpringRef();
+  const sketchTransition = useTransition(isSketching, {
+    from: { x: 500, opacity: 0 },
+    enter: { x: 0, opacity: 1 },
+    leave: { x: -500, opacity: 0 },
+    ref: sketchTransRef,
+  });
 
+  const voteTransition = useTransition(isVoting, {
+    from: { x: 500, opacity: 0 },
+    enter: { x: 0, opacity: 1 },
+    leave: { x: -500, opacity: 0 },
+    ref: voteTransRef,
+  });
+  const resultTransition = useTransition(isResults, {
+    from: { x: 500, opacity: 0 },
+    enter: { x: 0, opacity: 1 },
+    ref: resultTransRef,
+  });
+  useChain([sketchTransRef, voteTransRef, resultTransRef]);
   function ClickHandler() {
-    RandCard();
     StartGame();
   }
   return (
@@ -47,23 +68,48 @@ const Lobby = () => {
               })}
           </div>
           {activePlayer.isHost && (
-            <Button variant="contained" onClick={() => ClickHandler()}>
+            <Button
+              startIcon={<PlayArrowIcon></PlayArrowIcon>}
+              variant="contained"
+              disabled={players.length < 2}
+              onClick={() => ClickHandler()}
+            >
               start game
             </Button>
           )}
         </div>
       )}
-      {isSketching && <Sketch SendSketch={SendSketch}></Sketch>}
-      {isVoting && (
-        <Vote
-          ToResults={ToResults}
-          ReadyPlayer={ReadyPlayer}
-          SendVote={SendVote}
-          setReadies={setReadies}
-          readies={readies}
-        ></Vote>
+      {sketchTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <Sketch SendSketch={SendSketch}></Sketch>
+            </animated.div>
+          )
       )}
-      {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>}
+      {voteTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <Vote
+                ToResults={ToResults}
+                ReadyPlayer={ReadyPlayer}
+                SendVote={SendVote}
+                setReadies={setReadies}
+                readies={readies}
+              ></Vote>
+            </animated.div>
+          )
+      )}
+      {resultTransition(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <Results ResetRound={ResetRound} rounds={rounds}></Results>
+            </animated.div>
+          )
+      )}
+      {/* {isResults && <Results ResetRound={ResetRound} rounds={rounds}></Results>} */}
       <div className="footer-filler"></div>
       <footer className="d-flex top-border space-between">
         <h2 className="margin-top-small">-{activePlayer.displayName}-</h2>

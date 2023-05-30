@@ -5,7 +5,8 @@ import randomString from "random-string";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Swal from "sweetalert2";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import LoginIcon from "@mui/icons-material/Login";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
 const Main = () => {
   const {
     lobbyKey,
@@ -79,8 +80,7 @@ const Main = () => {
               </div>
             )}
             {(isInLobby || isHosting) && (
-              <div className="text-focus-in">
-                <AccountCircle sx={{ color: "action.active", mr: 1, my: 2 }} />
+              <div className="text-focus-in ">
                 <TextField
                   id="displayName"
                   type="text"
@@ -91,15 +91,23 @@ const Main = () => {
               </div>
             )}
             {!isInLobby && (
-              <div className="text-center center join-button">
-                <Button variant="contained" onClick={() => lobbyJoiner()}>
-                  {"Join".toLowerCase()}
+              <div id="join" className="text-center center join-button">
+                <Button
+                  startIcon={<LoginIcon />}
+                  variant="contained"
+                  onClick={() => lobbyJoiner()}
+                >
+                  Join lobby
                 </Button>
               </div>
             )}
             {(isInLobby || isHosting) && (
-              <div className="text-focus-in join-button">
-                <Button variant="contained" onClick={() => lobbyEnter()}>
+              <div className="text-focus-in join-button ">
+                <Button
+                  startIcon={<LoginIcon />}
+                  variant="contained"
+                  onClick={() => lobbyEnter()}
+                >
                   Enter Lobby
                 </Button>
               </div>
@@ -109,7 +117,11 @@ const Main = () => {
           {!isInLobby && <div className="vl center"></div>}
           {!isHosting && !isJoining && (
             <div className="">
-              <Button variant="contained" onClick={() => lobbyCreater()}>
+              <Button
+                startIcon={<DesignServicesIcon />}
+                variant="contained"
+                onClick={() => lobbyCreater()}
+              >
                 Create Lobby
               </Button>
             </div>
