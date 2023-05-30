@@ -3,17 +3,17 @@
   "name": "3-2-1 Sketch!",
   "icons": [
     {
-      "src": "doodles.jpeg",
+      "src": "/images/doodles.jpeg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "doodles.jpeg",
+      "src": "/images/doodles.jpeg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "doodles.jpeg",
+      "src": "/images/doodles.jpeg",
       "type": "image/png",
       "sizes": "512x512"
     }
