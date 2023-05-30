@@ -72,7 +72,7 @@ const Lobby = () => {
             <Button
               startIcon={<PlayArrowIcon></PlayArrowIcon>}
               variant="contained"
-              disabled={players.length < 2}
+              // disabled={players.length < 2}
               onClick={() => ClickHandler()}
             >
               start game

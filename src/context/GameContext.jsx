@@ -100,7 +100,6 @@ export function GameProvider(props) {
     ["Lemon ", "Lime ", "Orange "],
     ["Wallet ", "Purse ", "Clutch "],
     ["Cup ", "Mug ", "Glass "],
-    ["Elephant ", "Giraffe ", "Lion "],
     ["Rain ", "Snow ", "Hail "],
     ["Sun ", "Sky ", "Cloud "],
     ["bandana ", "Shawl ", "Scarf "],

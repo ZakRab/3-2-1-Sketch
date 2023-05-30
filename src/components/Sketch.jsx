@@ -72,10 +72,7 @@ const Sketch = ({ SendSketch }) => {
         setCountDown((curr) => curr - 1);
       }, 1000);
     }
-  }, [cardCountDown]);
-  useEffect(() => {
-    if (countDown <= 0) {
-      console.log("sending seketch");
+    if (cardCountDown <= 0 && countDown <= 0) {
       canvas.current
         .exportImage("png")
         .then((data) => {
@@ -94,7 +91,7 @@ const Sketch = ({ SendSketch }) => {
     if (countDown === 8) {
       tickingSound.pause();
     }
-  }, [countDown]);
+  }, [countDown, cardCountDown]);
 
   const barTransition = useTransition(cardCountDown <= 0, {
     from: { opacity: 0 },
